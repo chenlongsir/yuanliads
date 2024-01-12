@@ -13,6 +13,8 @@ publishing {
             groupId = 'com.chen.open_ad_sdk_library'
             artifactId = 'yuanliads-lib'
             version = '1.0.0'
+            // 包含 AAR 文件
+            artifact("$libsDir/open_ad_sdk_5.8.0.7.aar")
             from components.java
         }
     }
