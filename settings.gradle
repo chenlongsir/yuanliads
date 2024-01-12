@@ -1,0 +1,3 @@
+rootProject.name = "yuanliads"
+include ':app'
+include ':pangolinads'
