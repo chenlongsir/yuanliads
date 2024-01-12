@@ -19,7 +19,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.yuanli.ad'
                 artifactId = 'yuanliads'
-                version = '1.0.2'
+                version = '1.0.3'
             }
         }
     }
@@ -31,7 +31,6 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation project(path: ':open_ad_sdk_library')
 }
