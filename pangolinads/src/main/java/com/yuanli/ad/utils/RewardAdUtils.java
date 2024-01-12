@@ -35,7 +35,7 @@ public class RewardAdUtils implements AdListener {
         this.adStateListener = adStateListener;
         /** 1、创建AdSlot对象 */
         AdSlot adslot = new AdSlot.Builder()
-                .setCodeId(AdConstants.AD_REWARD_ID)
+                .setCodeId(InitUtils.getConstants().getRewardId())
                 .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)
                 .setMediationAdSlot(new MediationAdSlot
                         .Builder()

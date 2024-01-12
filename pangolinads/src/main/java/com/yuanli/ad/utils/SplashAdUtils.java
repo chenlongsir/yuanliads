@@ -1,6 +1,5 @@
 package com.yuanli.ad.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -12,7 +11,6 @@ import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTSplashAd;
-import com.yuanli.ad.constants.AdConstants;
 import com.yuanli.ad.holder.TTAdManagerHolder;
 
 public class SplashAdUtils {
@@ -37,7 +35,7 @@ public class SplashAdUtils {
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
         return new AdSlot.Builder()
-                .setCodeId(AdConstants.AD_SPLASH_COD_ID)
+                .setCodeId(InitUtils.getConstants().getSplashId())
                 .setSupportDeepLink(true)
                 .setImageAcceptedSize(width, height)
                 .setExpressViewAcceptedSize(width, height)

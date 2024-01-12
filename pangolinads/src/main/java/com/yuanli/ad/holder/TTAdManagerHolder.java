@@ -12,6 +12,7 @@ import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.yuanli.ad.BuildConfig;
 import com.yuanli.ad.constants.AdConstants;
+import com.yuanli.ad.utils.InitUtils;
 
 public class TTAdManagerHolder {
     private static boolean sInit;
@@ -29,6 +30,12 @@ public class TTAdManagerHolder {
 
     public static void init(Context context) {
         TTAdManagerHolder.context = context;
+        doInit(context);
+    }
+
+    public static void init(Context context,AdConstants adConstants) {
+        TTAdManagerHolder.context = context;
+        InitUtils.init(adConstants);
         doInit(context);
     }
 
@@ -77,9 +84,9 @@ public class TTAdManagerHolder {
 
     private static TTAdConfig buildConfig() {
         return new TTAdConfig.Builder()
-                .appId(AdConstants.AD_APP_ID)
+                .appId(InitUtils.getConstants().getAppId())
                 .useTextureView(true) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
-                .appName(AdConstants.AD_APP_NAME)
+                .appName(InitUtils.getConstants().getAppName())
                 .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
                 .allowShowNotify(true) //是否允许sdk展示通知栏提示
                 .debug(BuildConfig.DEBUG) //测试阶段打开，可以通过日志排查问题，上线时去除该调用

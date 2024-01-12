@@ -34,7 +34,7 @@ public class InsertAdUtils implements AdListener {
     public void loadAd(final AdStateListener stateListener) {
         this.stateListener = stateListener;
         AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(AdConstants.AD_INSERT_ID) //广告位id
+                .setCodeId(InitUtils.getConstants().getInsertId()) //广告位id
                 .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)//设置横竖屏方向
                 .setMediationAdSlot(new MediationAdSlot.Builder()
                         .setMuted(true)//是否静音
