@@ -3,118 +3,125 @@ package com.yuanli.ad.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
-import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
-import com.yuanli.ad.listence.AdListence;
+import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
+import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot;
 import com.yuanli.ad.constants.AdConstants;
+import com.yuanli.ad.holder.TTAdManagerHolder;
+import com.yuanli.ad.listener.AdListener;
+import com.yuanli.ad.listener.AdStateListener;
 
-import java.util.List;
-
-public class InsertAdUtils {
-    private Context mContext;
+public class InsertAdUtils implements AdListener {
+    private Activity activity;
     private TTAdNative mTTAdNative;
-    public InsertAdUtils(Context context,AdListence listence) {
-        this.mContext = context;
-        this.listence = listence;
-        initAdConfig(context);
+    private TTFullScreenVideoAd mTTFullScreenVideoAd; // 插全屏广告对象
+    private TTAdNative.FullScreenVideoAdListener mFullScreenVideoListener; // 广告加载监听器
+    private TTFullScreenVideoAd.FullScreenVideoAdInteractionListener mFullScreenVideoAdInteractionListener; // 广告展示监听器
+    private AdStateListener stateListener;
+
+    public InsertAdUtils(Activity activity) {
+        this.activity = activity;
     }
 
     private void initAdConfig(Context context) {
-        mTTAdNative = TTAdSdk.getAdManager().createAdNative(context);
-//        TTAdManagerHolder.get().requestPermissionIfNecessary(context);
+        TTAdManagerHolder.get().requestPermissionIfNecessary(context);
     }
 
-    public void loadInsertAd() {
+    public void loadAd(final AdStateListener stateListener) {
+        this.stateListener = stateListener;
         AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(AdConstants.AD_INSERT_ID) //广告位id
-                .setSupportDeepLink(false)
-                .setAdCount(1) //请求广告数量为1到3条
-                .setExpressViewAcceptedSize(350, 500) //期望模板广告view的size,单位dp
-                .setNativeAdType(AdSlot.TYPE_INTERACTION_AD)
+                .setCodeId(InitUtils.getConstants().getInsertId()) //广告位id
+                .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)//设置横竖屏方向
+                .setMediationAdSlot(new MediationAdSlot.Builder()
+                        .setMuted(true)//是否静音
+                        .setVolume(0.7f)//设置音量
+                        .setBidNotify(true)//竞价结果通知
+                        .build())
                 .build();
 
-        mTTAdNative.loadInteractionExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
-            //请求广告失败
-            @Override
-            public void onError(int code, String message) {
-                if (listence != null){
-                    listence.onError(message);
-                }
-            }
+        initListeners();
 
-            //请求广告成功
-            @Override
-            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
-                if (ads.get(0) == null) {
-                    return;
-                }
-                final TTNativeExpressAd ad = ads.get(0);
-                ad.showInteractionExpressAd((Activity) mContext);
-                ad.render();
-                ad.setExpressInteractionListener(new TTNativeExpressAd.AdInteractionListener() {
+        mTTAdNative = TTAdSdk.getAdManager().createAdNative(activity);
 
-                    @Override
-                    public void onAdDismiss() {
-                        if (listence != null){
-                            listence.onClose();
-                        }
-                    }
-
-                    @Override
-                    public void onAdClicked(View view, int i) {
-                        Log.d("xxx" ,"onAdClicked");
-                    }
-
-                    @Override
-                    public void onAdShow(View view, int i) {
-                        Log.d("xxx" ,"onAdShow");
-
-                    }
-
-                    @Override
-                    public void onRenderFail(View view, String s, int i) {
-                        Log.d("xxx" ,"onRenderFail");
-
-                    }
-
-                    @Override
-                    public void onRenderSuccess(View view, float v, float v1) {
-                        Log.d("xxx" ,"onRenderSuccess");
-
-                    }
-                });
-
-            }
-        });
+        /* 加载广告 */
+        stateListener.loading();
+        mTTAdNative.loadFullScreenVideoAd(adSlot, this.mFullScreenVideoListener);
     }
 
-    private AdListence listence;
+    @Override
+    public void showAd() {
+        if (this.mTTFullScreenVideoAd == null) {
+            Log.d(AdConstants.TAG, "请先加载广告或等待广告加载完毕后再调用show方法");
+            return;
+        }
+        /*设置展示监听器，展示广告 */
+        this.mTTFullScreenVideoAd.setFullScreenVideoAdInteractionListener(this.mFullScreenVideoAdInteractionListener);
+        this.mTTFullScreenVideoAd.showFullScreenVideoAd(activity);
+    }
 
+    private void initListeners() {
+        this.mFullScreenVideoListener = new TTAdNative.FullScreenVideoAdListener() {
+            public void onError(int code, String message) {
+                Log.d(AdConstants.TAG, "InterstitialFull onError code = " + code + " msg = " + message);
+                stateListener.stopLoading();
+            }
 
-//    public void initTTF(Activity activity,AdListence listence){
-//        this.mContext = activity;
-//        this.listence = listence;
-//        TTAdManagerHolder.init(activity, new TTAdSdk.InitCallback() {
-//            @Override
-//            public void success() {
-//                initAdConfig(mContext);
-//                loadInsertAd();
-//            }
-//
-//            @Override
-//            public void fail(int i, String s) {
-//
-//            }
-//        });
-//    }
+            public void onFullScreenVideoAdLoad(TTFullScreenVideoAd ad) {
+                Log.d(AdConstants.TAG, "InterstitialFull onFullScreenVideoLoaded");
+                mTTFullScreenVideoAd = ad;
+                stateListener.stopLoading();
+                stateListener.real();
+            }
+
+            public void onFullScreenVideoCached() {
+                Log.d(AdConstants.TAG, "InterstitialFull onFullScreenVideoCached");
+            }
+
+            public void onFullScreenVideoCached(TTFullScreenVideoAd ad) {
+                Log.d(AdConstants.TAG, "InterstitialFull onFullScreenVideoCached");
+                mTTFullScreenVideoAd = ad;
+                stateListener.stopLoading();
+                stateListener.real();
+            }
+        };
+        this.mFullScreenVideoAdInteractionListener = new TTFullScreenVideoAd.FullScreenVideoAdInteractionListener() {
+            public void onAdShow() {
+                Log.d(AdConstants.TAG, "InterstitialFull onAdShow");
+            }
+
+            public void onAdVideoBarClick() {
+                Log.d(AdConstants.TAG, "InterstitialFull onAdVideoBarClick");
+            }
+
+            public void onAdClose() {
+                stateListener.success();
+                Log.d(AdConstants.TAG, "InterstitialFull onAdClose");
+            }
+
+            public void onVideoComplete() {
+                Log.d(AdConstants.TAG, "InterstitialFull onVideoComplete");
+            }
+
+            public void onSkippedVideo() {
+                stateListener.success();
+                Log.d(AdConstants.TAG, "InterstitialFull onSkippedVideo");
+            }
+        };
+    }
 
     public void onDestroy() {
-        if (mTTAdNative != null) {
-            mTTAdNative = null;
+        if (mTTFullScreenVideoAd != null && mTTFullScreenVideoAd.getMediationManager() != null) {
+            mTTFullScreenVideoAd.getMediationManager().destroy();
         }
+        mTTAdNative = null;
+        mFullScreenVideoListener = null;
+        mFullScreenVideoAdInteractionListener = null;
+        stateListener = null;
+        activity = null;
     }
+
 }
