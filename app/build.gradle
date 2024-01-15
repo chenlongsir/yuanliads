@@ -33,7 +33,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.yuanli.ad'
                 artifactId = 'yuanliads'
-                version = '1.0.8'
+                version = '1.1.0'
             }
         }
     }
@@ -41,7 +41,6 @@ afterEvaluate {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation project(path: ':open_ad_sdk_library')
-    implementation "com.pangle.cn:mediation-sdk:5.9.0.8"  //融合SDK
+    implementation "com.pangle.cn:mediation-sdk:5.8.0.7"  //融合SDK
 
 }
