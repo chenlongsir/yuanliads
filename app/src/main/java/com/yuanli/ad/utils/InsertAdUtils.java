@@ -32,24 +32,34 @@ public class InsertAdUtils implements AdListener {
     }
 
     public void loadAd(final AdStateListener stateListener) {
-        this.stateListener = stateListener;
-        AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(InitUtils.getConstants().getInsertId()) //广告位id
-                .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)//设置横竖屏方向
-                .setMediationAdSlot(new MediationAdSlot.Builder()
-                        .setMuted(true)//是否静音
-                        .setVolume(0.7f)//设置音量
-                        .setBidNotify(true)//竞价结果通知
-                        .build())
-                .build();
+        TTAdManagerHolder.setInitListener(new TTAdManagerHolder.InitListener() {
+            @Override
+            public void onSuccess() {
+                InsertAdUtils.this.stateListener = stateListener;
+                AdSlot adSlot = new AdSlot.Builder()
+                        .setCodeId(InitUtils.getConstants().getInsertId()) //广告位id
+                        .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)//设置横竖屏方向
+                        .setMediationAdSlot(new MediationAdSlot.Builder()
+                                .setMuted(true)//是否静音
+                                .setVolume(0.7f)//设置音量
+                                .setBidNotify(true)//竞价结果通知
+                                .build())
+                        .build();
 
-        initListeners();
+                initListeners();
 
-        mTTAdNative = TTAdSdk.getAdManager().createAdNative(activity);
+                mTTAdNative = TTAdSdk.getAdManager().createAdNative(activity);
 
-        /* 加载广告 */
-        stateListener.loading();
-        mTTAdNative.loadFullScreenVideoAd(adSlot, this.mFullScreenVideoListener);
+                /* 加载广告 */
+                stateListener.loading();
+                mTTAdNative.loadFullScreenVideoAd(adSlot, InsertAdUtils.this.mFullScreenVideoListener);
+            }
+
+            @Override
+            public void onError(String msg) {
+                stateListener.toast(msg);
+            }
+        });
     }
 
     @Override

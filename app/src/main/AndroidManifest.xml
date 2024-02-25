@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yuanli.ad">
 
     <!--必要权限-->
@@ -22,8 +23,8 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN" />
-
-    <application>
+    <application
+        >
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.CSJAdError;
+import com.bytedance.sdk.openadsdk.CSJSplashAd;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
@@ -43,118 +45,68 @@ public class SplashAdUtils {
     }
 
     public void loadSplashAd(Context context, AdStateListener adStateListener) {
-        mContext = context;
-        mAdStateListener = adStateListener;
-        AdSlot adSlot = getAdSlot();
-        TTAdNative adNative = TTAdManagerHolder.get().createAdNative(context);
-        adNative.loadSplashAd(adSlot, splashAdListener, AD_TIME_OUT);
-    }
-
-    /**
-     * 开屏广告加载监听
-     */
-    private TTAdNative.SplashAdListener splashAdListener = new TTAdNative.SplashAdListener() {
-        @Override
-        public void onError(int code, String message) {
-            Log.e("开屏广告加载异常", message);
-            closeAd();
-        }
-
-        @Override
-        public void onTimeout() {
-            Log.e(TAG, "开屏广告加载超时");
-            closeAd();
-        }
-
-        @Override
-        public void onSplashAdLoad(TTSplashAd ttSplashAd) {
-            Log.d(TAG, "开屏广告请求成功");
-            if (ttSplashAd == null) {
-                closeAd();
-                return;
-            }
-            //获取SplashView
-            View view = ttSplashAd.getSplashView();
-            setSuccess(view);
-            //设置SplashView的交互监听器
-            setAdInteractionListener(ttSplashAd);
-            //设置SplashView的下载监听
-            if (ttSplashAd.getInteractionType() == TTAdConstant.INTERACTION_TYPE_DOWNLOAD) {
-                setDownloadListener(ttSplashAd);
-            }
-        }
-    };
-
-    /**
-     * SplashView的交互监听器
-     *
-     * @param ttSplashAd
-     */
-    private void setAdInteractionListener(TTSplashAd ttSplashAd) {
-        ttSplashAd.setSplashInteractionListener(new TTSplashAd.AdInteractionListener() {
+        TTAdManagerHolder.setInitListener(new TTAdManagerHolder.InitListener() {
             @Override
-            public void onAdClicked(View view, int type) {
-                Log.d(TAG, "开屏广告点击");
+            public void onSuccess() {
+                mContext = context;
+                mAdStateListener = adStateListener;
+                AdSlot adSlot = getAdSlot();
+                TTAdNative adNative = TTAdManagerHolder.get().createAdNative(context);
+                adNative.loadSplashAd(adSlot, new TTAdNative.CSJSplashAdListener() {
+                    @Override
+                    public void onSplashLoadSuccess(CSJSplashAd csjSplashAd) {
+
+                    }
+
+                    @Override
+                    public void onSplashLoadFail(CSJAdError csjAdError) {
+                        Log.e(TAG, "开屏广告下载失败");
+                        closeAd();
+                    }
+
+                    @Override
+                    public void onSplashRenderSuccess(CSJSplashAd csjSplashAd) {
+                        Log.d(TAG, "开屏广告请求成功");
+
+                        /** 渲染成功后，展示广告 */
+                        showSplashAd(csjSplashAd,adStateListener);
+                    }
+
+                    @Override
+                    public void onSplashRenderFail(CSJSplashAd csjSplashAd, CSJAdError 			                                        csjAdError) {
+                        Log.e(TAG, "开屏广告加载超时");
+                        closeAd();
+                    }
+                }, AD_TIME_OUT);
             }
 
             @Override
-            public void onAdShow(View view, int type) {
-                Log.d(TAG, "开屏广告展示");
-            }
-
-            @Override
-            public void onAdSkip() {
-                Log.d(TAG, "开屏广告跳过");
-                closeAd();
-            }
-
-            @Override
-            public void onAdTimeOver() {
-                Log.d(TAG, "开屏广告倒计时结束");
-                closeAd();
+            public void onError(String msg) {
+                adStateListener.toast(msg);
             }
         });
+
     }
 
-    /**
-     * 设置下载监听
-     *
-     * @param ttSplashAd
-     */
-    private void setDownloadListener(TTSplashAd ttSplashAd) {
-        ttSplashAd.setDownloadListener(new TTAppDownloadListener() {
-            boolean hasShow = false;
-
+    public void showSplashAd(CSJSplashAd csjSplashAd, AdStateListener adStateListener) {
+        csjSplashAd.setSplashAdListener(new CSJSplashAd.SplashAdListener() {
             @Override
-            public void onIdle() {
+            public void onSplashAdShow(CSJSplashAd csjSplashAd) {
             }
 
             @Override
-            public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
-                if (!hasShow) {
-                    Toast.makeText(mContext, "下载中...", Toast.LENGTH_SHORT).show();
-                    hasShow = true;
-                }
+            public void onSplashAdClick(CSJSplashAd csjSplashAd) {
             }
 
             @Override
-            public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
-                Toast.makeText(mContext, "下载暂停...", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
-                Toast.makeText(mContext, "下载失败...", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDownloadFinished(long totalBytes, String fileName, String appName) {
-            }
-
-            @Override
-            public void onInstalled(String fileName, String appName) {
+            public void onSplashAdClose(CSJSplashAd csjSplashAd, int i) {
+                // 广告关闭后，销毁广告页面
+                adStateListener.onClose();
             }
         });
+        View splashView = csjSplashAd.getSplashView();
+        adStateListener.onAdLoadSuccess(splashView);
+
     }
 
     public interface AdStateListener {
@@ -169,6 +121,8 @@ public class SplashAdUtils {
          * 广告关闭或异常
          */
         void onClose();
+
+        void toast(String message);
     }
 
     private AdStateListener mAdStateListener;

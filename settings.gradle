@@ -1,3 +1,2 @@
 rootProject.name = "pangolinads"
 include ':app'
-include ':open_ad_sdk_library'

@@ -6,6 +6,9 @@ buildscript {
         google()
         mavenCentral()
         maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"
+        }
+        maven {
             url 'https://artifact.bytedance.com/repository/pangle'
         }
     }
@@ -20,6 +23,9 @@ allprojects {
         google()
         maven { url "https://jitpack.io" }
         mavenCentral()
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"
+        }
         maven {
             url 'https://artifact.bytedance.com/repository/pangle'
         }

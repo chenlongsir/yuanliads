@@ -2,6 +2,8 @@ package com.yuanli.ad.utils;
 
 import android.app.Activity;
 
+import com.bytedance.sdk.openadsdk.TTM;
+import com.yuanli.ad.holder.TTAdManagerHolder;
 import com.yuanli.ad.listener.AdListener;
 import com.yuanli.ad.listener.AdStateListener;
 

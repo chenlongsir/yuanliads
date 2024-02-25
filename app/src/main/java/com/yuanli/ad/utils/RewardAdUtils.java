@@ -32,27 +32,37 @@ public class RewardAdUtils implements AdListener {
     }
 
     public void loadAd(final AdStateListener adStateListener){
-        this.adStateListener = adStateListener;
-        /** 1、创建AdSlot对象 */
-        AdSlot adslot = new AdSlot.Builder()
-                .setCodeId(InitUtils.getConstants().getRewardId())
-                .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)
-                .setMediationAdSlot(new MediationAdSlot
-                        .Builder()
-                        .setRewardName("rewardName")
-                        .setRewardAmount(100)
-                        .build())
-                .build();
+        TTAdManagerHolder.setInitListener(new TTAdManagerHolder.InitListener() {
+            @Override
+            public void onSuccess() {
+                RewardAdUtils.this.adStateListener = adStateListener;
+                /** 1、创建AdSlot对象 */
+                AdSlot adslot = new AdSlot.Builder()
+                        .setCodeId(InitUtils.getConstants().getRewardId())
+                        .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)
+                        .setMediationAdSlot(new MediationAdSlot
+                                .Builder()
+                                .setRewardName("rewardName")
+                                .setRewardAmount(100)
+                                .build())
+                        .build();
 
-        /** 2、创建TTAdNative对象 */
-        TTAdNative adNativeLoader = TTAdSdk.getAdManager().createAdNative(activity);
+                /** 2、创建TTAdNative对象 */
+                TTAdNative adNativeLoader = TTAdSdk.getAdManager().createAdNative(activity);
 
-        /** 3、创建加载、展示监听器 */
-        initListeners();
+                /** 3、创建加载、展示监听器 */
+                initListeners();
 
-        adStateListener.loading();
-        /** 4、加载广告 */
-        adNativeLoader.loadRewardVideoAd(adslot, mRewardVideoListener);
+                adStateListener.loading();
+                /** 4、加载广告 */
+                adNativeLoader.loadRewardVideoAd(adslot, mRewardVideoListener);
+            }
+
+            @Override
+            public void onError(String msg) {
+                adStateListener.toast(msg);
+            }
+        });
     }
 
     private void initListeners() {
