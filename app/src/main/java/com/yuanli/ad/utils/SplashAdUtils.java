@@ -45,11 +45,11 @@ public class SplashAdUtils {
     }
 
     public void loadSplashAd(Context context, AdStateListener adStateListener) {
+        mContext = context;
+        mAdStateListener = adStateListener;
         TTAdManagerHolder.setInitListener(new TTAdManagerHolder.InitListener() {
             @Override
             public void onSuccess() {
-                mContext = context;
-                mAdStateListener = adStateListener;
                 AdSlot adSlot = getAdSlot();
                 TTAdNative adNative = TTAdManagerHolder.get().createAdNative(context);
                 adNative.loadSplashAd(adSlot, new TTAdNative.CSJSplashAdListener() {

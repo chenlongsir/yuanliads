@@ -32,10 +32,11 @@ public class InsertAdUtils implements AdListener {
     }
 
     public void loadAd(final AdStateListener stateListener) {
+        InsertAdUtils.this.stateListener = stateListener;
+
         TTAdManagerHolder.setInitListener(new TTAdManagerHolder.InitListener() {
             @Override
             public void onSuccess() {
-                InsertAdUtils.this.stateListener = stateListener;
                 AdSlot adSlot = new AdSlot.Builder()
                         .setCodeId(InitUtils.getConstants().getInsertId()) //广告位id
                         .setOrientation(TTAdConstant.ORIENTATION_VERTICAL)//设置横竖屏方向
@@ -57,6 +58,7 @@ public class InsertAdUtils implements AdListener {
 
             @Override
             public void onError(String msg) {
+                stateListener.onError();
                 stateListener.toast(msg);
             }
         });
@@ -78,6 +80,7 @@ public class InsertAdUtils implements AdListener {
             public void onError(int code, String message) {
                 Log.d(AdConstants.TAG, "InterstitialFull onError code = " + code + " msg = " + message);
                 stateListener.stopLoading();
+                stateListener.onError();
             }
 
             public void onFullScreenVideoAdLoad(TTFullScreenVideoAd ad) {

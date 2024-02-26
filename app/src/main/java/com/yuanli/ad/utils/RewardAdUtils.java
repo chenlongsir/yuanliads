@@ -32,10 +32,10 @@ public class RewardAdUtils implements AdListener {
     }
 
     public void loadAd(final AdStateListener adStateListener){
+        RewardAdUtils.this.adStateListener = adStateListener;
         TTAdManagerHolder.setInitListener(new TTAdManagerHolder.InitListener() {
             @Override
             public void onSuccess() {
-                RewardAdUtils.this.adStateListener = adStateListener;
                 /** 1、创建AdSlot对象 */
                 AdSlot adslot = new AdSlot.Builder()
                         .setCodeId(InitUtils.getConstants().getRewardId())
@@ -60,6 +60,8 @@ public class RewardAdUtils implements AdListener {
 
             @Override
             public void onError(String msg) {
+                adStateListener.stopLoading();
+                adStateListener.onError();
                 adStateListener.toast(msg);
             }
         });
@@ -70,6 +72,7 @@ public class RewardAdUtils implements AdListener {
             @Override
             public void onError(int i, String s) {
                 Log.i(AdConstants.TAG, "reward load fail: errCode: " + i + ", errMsg: " + s);
+                adStateListener.stopLoading();
                 adStateListener.onError();
             }
 
