@@ -60,14 +60,13 @@ public class SplashAdUtils {
 
                     @Override
                     public void onSplashLoadFail(CSJAdError csjAdError) {
-                        Log.e(TAG, "开屏广告下载失败");
+                        Log.e(TAG, "开屏广告下载失败" + csjAdError.getMsg());
                         closeAd();
                     }
 
                     @Override
                     public void onSplashRenderSuccess(CSJSplashAd csjSplashAd) {
                         Log.d(TAG, "开屏广告请求成功");
-
                         /** 渲染成功后，展示广告 */
                         showSplashAd(csjSplashAd,adStateListener);
                     }
@@ -82,6 +81,7 @@ public class SplashAdUtils {
 
             @Override
             public void onError(String msg) {
+                closeAd();
                 adStateListener.toast(msg);
             }
         });
