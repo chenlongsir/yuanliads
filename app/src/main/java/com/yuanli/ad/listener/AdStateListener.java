@@ -10,5 +10,7 @@ public interface AdStateListener {
 
     void stopLoading();
 
-    void toast(String msg);
+   default void toast(String msg){
+
+   };
 }

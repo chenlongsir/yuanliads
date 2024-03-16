@@ -19,10 +19,10 @@
 <!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
 
     <!--必要权限，解决安全风险漏洞，发送和注册广播事件需要调用带有传递权限的接口-->
-    <permission      android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN"
-        android:protectionLevel="signature" />
+<!--    <permission      android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN"-->
+<!--        android:protectionLevel="signature" />-->
 
-    <uses-permission android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN" />
+<!--    <uses-permission android:name="${applicationId}.openadsdk.permission.TT_PANGOLIN" />-->
 
 </manifest>
 
