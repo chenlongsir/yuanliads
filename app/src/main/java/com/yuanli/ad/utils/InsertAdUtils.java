@@ -130,6 +130,7 @@ public class InsertAdUtils implements AdListener {
         if (mTTFullScreenVideoAd != null && mTTFullScreenVideoAd.getMediationManager() != null) {
             mTTFullScreenVideoAd.getMediationManager().destroy();
         }
+        TTAdManagerHolder.clear();
         mTTAdNative = null;
         mFullScreenVideoListener = null;
         mFullScreenVideoAdInteractionListener = null;

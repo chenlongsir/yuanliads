@@ -158,6 +158,7 @@ public class RewardAdUtils implements AdListener {
         if (mTTRewardVideoAd != null && mTTRewardVideoAd.getMediationManager() != null) {
             mTTRewardVideoAd.getMediationManager().destroy();
         }
+        TTAdManagerHolder.clear();
         mRewardVideoListener = null;
         mRewardVideoAdInteractionListener = null;
         adStateListener = null;

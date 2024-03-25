@@ -27,6 +27,7 @@ public class SplashAdUtils {
     public void release() {
         mContext = null;
         mAdStateListener = null;
+        TTAdManagerHolder.clear();
     }
 
     /**
@@ -85,7 +86,6 @@ public class SplashAdUtils {
                 adStateListener.toast(msg);
             }
         });
-
     }
 
     public void showSplashAd(CSJSplashAd csjSplashAd, AdStateListener adStateListener) {
@@ -122,7 +122,9 @@ public class SplashAdUtils {
          */
         void onClose();
 
-        void toast(String message);
+        default void toast(String message){
+
+        };
     }
 
     private AdStateListener mAdStateListener;
@@ -137,5 +139,6 @@ public class SplashAdUtils {
         if (mAdStateListener != null) {
             mAdStateListener.onClose();
         }
+        release();
     }
 }
