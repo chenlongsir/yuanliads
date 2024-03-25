@@ -34,14 +34,14 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.yuanli.ad'
                 artifactId = 'yuanliads'
-                version = '1.1.7'
+                version = '1.1.8'
             }
         }
     }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "com.pangle.cn:mediation-sdk:5.9.2.8"  //融合SDK
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    compileOnly "com.pangle.cn:mediation-sdk:5.9.2.8"  //融合SDK
 
 }
