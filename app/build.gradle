@@ -33,7 +33,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.yuanli.ad'
                 artifactId = 'yuanliads'
-                version = '1.3.4'
+                version = '1.3.5'
             }
         }
     }
@@ -41,6 +41,6 @@ afterEvaluate {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:1.2.0"
-    implementation project(path: ':pangolin')
-    implementation project(path: ':menta')
+    implementation project(':pangolin')
+    implementation project(':menta')
 }

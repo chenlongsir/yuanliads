@@ -22,7 +22,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.yuanli.ad.yuanliads'
+                groupId = 'com.yuanli.ad'
                 artifactId = 'menta'
                 version = '1.0.0'
             }
@@ -32,7 +32,7 @@ afterEvaluate {
 
 dependencies {
 
-    implementation project(path: ':base')
+    implementation project(':base')
     // Mentasdk
     implementation 'cn.vlion.inland:vlion-core-ec:5.20.45'
     implementation ('cn.vlion.inland:oaid_sdk:1.0.25')
