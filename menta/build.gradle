@@ -32,8 +32,7 @@ afterEvaluate {
 
 dependencies {
 
-    implementation project(':base')
-
+    implementation project(path: ':base')
     // Mentasdk
     implementation 'cn.vlion.inland:vlion-core-ec:5.20.45'
     implementation ('cn.vlion.inland:oaid_sdk:1.0.25')

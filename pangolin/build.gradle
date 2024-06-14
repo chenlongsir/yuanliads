@@ -39,8 +39,8 @@ afterEvaluate {
 }
 
 dependencies {
+    implementation project(path: ':base')
 
-    implementation project(':base')
     implementation "com.pangle.cn:mediation-sdk:6.1.2.5"  //融合SDK
 
 }
