@@ -28,7 +28,10 @@ android {
 
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "androidx.appcompat:appcompat:1.2.0"
-    implementation project(':pangolin')
-    implementation project(':menta')
+    implementation project(path :':pangolin')
+    implementation project(path :':menta')
+    implementation project(':base')
 }
