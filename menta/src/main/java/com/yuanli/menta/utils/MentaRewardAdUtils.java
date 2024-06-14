@@ -144,7 +144,7 @@ public class MentaRewardAdUtils implements AdListener {
             @Override
             public void onAdClose() {
                 Log.d(TAG, "onAdClose: ");
-
+                adStateListener.onClose();
             }
         });
         //加载广告
@@ -153,8 +153,11 @@ public class MentaRewardAdUtils implements AdListener {
 
     @Override
     public void loadAd(AdStateListener adStateListener) {
+        if (!MentaAdManagerHold.isIsInitSuccess()){
+            adStateListener.onError();
+            return;
+        }
         this.adStateListener = adStateListener;
-
         int width = mActivity.getResources().getDisplayMetrics().widthPixels;
         int height = mActivity.getResources().getDisplayMetrics().heightPixels;
         vlionSlotConfig = new VlionSlotConfig.Builder()
@@ -172,10 +175,6 @@ public class MentaRewardAdUtils implements AdListener {
 
     @Override
     public void showAd() {
-        if (!MentaAdManagerHold.isIsInitSuccess()){
-            adStateListener.onError();
-            return;
-        }
         vlionRewardedVideoAd.showAd(mActivity);
     }
 

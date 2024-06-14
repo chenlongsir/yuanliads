@@ -106,6 +106,7 @@ public class RewardAdUtils implements AdListener {
             @Override
             public void onAdClose() {
                 Log.i(AdConstants.TAG, "reward close");
+                adStateListener.onClose();
             }
 
             @Override

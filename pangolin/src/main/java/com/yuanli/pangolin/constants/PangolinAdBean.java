@@ -4,11 +4,22 @@ import com.yuanli.base.BaseAdBean;
 
 public class PangolinAdBean extends BaseAdBean {
 
-    private final String bannerId;
+    private String bannerId;
+    private final String appName;
 
-    public PangolinAdBean(String appName, String appId, String appKey, String splashId, String insertId, String rewardId,String bannerId) {
-        super(appName, appId, appKey, splashId, insertId, rewardId);
+    public PangolinAdBean(String appName, String appId,  String splashId, String insertId, String rewardId) {
+        super(appId, splashId, insertId, rewardId);
+        this.appName = appName;
+    }
+
+    public PangolinAdBean(String appName, String appId,  String splashId, String insertId, String rewardId,String bannerId) {
+        super(appId, splashId, insertId, rewardId);
         this.bannerId = bannerId;
+        this.appName = appName;
+    }
+
+    public String getAppName() {
+        return appName;
     }
 
     public String getBannerId() {

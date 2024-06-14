@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.yuanli.base.AdListener;
 import com.yuanli.base.AdStateListener;
 import com.yuanli.menta.MentaAdBack;
+import com.yuanli.menta.MentaAdManagerHold;
 import com.yuanli.menta.constants.MentaConstants;
 
 import cn.vlion.ad.inland.base.util.config.VlionScaleType;
@@ -97,6 +98,7 @@ public class MentaInsertAdUtils implements AdListener {
             @Override
             public void onAdClose() {
                adStateListener.success();
+               adStateListener.onClose();
             }
         });
         //加载广告
@@ -106,6 +108,10 @@ public class MentaInsertAdUtils implements AdListener {
 
     @Override
     public void loadAd(AdStateListener adStateListener) {
+        if(MentaAdManagerHold.isIsInitSuccess()){
+            adStateListener.onError();
+            return;
+        }
         this.adStateListener = adStateListener;
         int width = mActivity.getResources().getDisplayMetrics().widthPixels;
         int height = mActivity.getResources().getDisplayMetrics().heightPixels;
@@ -120,12 +126,11 @@ public class MentaInsertAdUtils implements AdListener {
                 //AD_IMAGE_SCALING_CENTER_CROP 对标ImageView设置scaleType centerCrop
                 .setImageScale(VlionScaleType.AD_IMAGE_SCALING_CENTER_CROP)
                 .build();
-
+        loadMentaInsertAd();
     }
 
     @Override
     public void showAd() {
-        loadMentaInsertAd();
         //广告视图渲染成功展示
         vlionInterstitialAd.showAd();
     }

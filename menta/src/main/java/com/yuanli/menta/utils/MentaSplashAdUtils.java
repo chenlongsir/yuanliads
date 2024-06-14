@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 import com.yuanli.menta.MentaAdBack;
+import com.yuanli.menta.MentaAdManagerHold;
 import com.yuanli.menta.constants.MentaConstants;
 
 import cn.vlion.ad.inland.base.util.config.VlionScaleType;
@@ -27,6 +28,10 @@ public class MentaSplashAdUtils {
      * @param mentaSplashBack
      */
     public void showSplashAd(Activity activity, ViewGroup viewGroup, MentaAdBack mentaSplashBack){
+        if (!MentaAdManagerHold.isIsInitSuccess()){
+            mentaSplashBack.onFail();
+            return;
+        }
         mActivity = activity;
         mViewGroup = viewGroup;
         mMentaSplashBack = mentaSplashBack;
