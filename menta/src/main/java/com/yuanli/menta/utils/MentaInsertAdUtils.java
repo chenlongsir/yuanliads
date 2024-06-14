@@ -54,8 +54,6 @@ public class MentaInsertAdUtils implements AdListener {
              */
             @Override
             public void onAdRenderSuccess() {
-                //广告视图渲染成功展示
-                vlionInterstitialAd.showAd();
                 adStateListener.stopLoading();
                 adStateListener.real();
             }
@@ -128,6 +126,8 @@ public class MentaInsertAdUtils implements AdListener {
     @Override
     public void showAd() {
         loadMentaInsertAd();
+        //广告视图渲染成功展示
+        vlionInterstitialAd.showAd();
     }
 
     @Override

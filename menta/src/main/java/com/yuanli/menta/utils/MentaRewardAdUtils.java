@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.yuanli.base.AdListener;
 import com.yuanli.base.AdStateListener;
-import com.yuanli.menta.MentaAdBack;
 import com.yuanli.menta.MentaAdManagerHold;
-import com.yuanli.menta.constants.MentaConstants;
 
 import cn.vlion.ad.inland.base.util.config.VlionScaleType;
 import cn.vlion.ad.inland.core.config.VlionAdError;
@@ -59,7 +57,6 @@ public class MentaRewardAdUtils implements AdListener {
                 Log.d(TAG, "onAdRenderSuccess: ");
                 adStateListener.stopLoading();
                 adStateListener.real();
-                vlionRewardedVideoAd.showAd(mActivity);
             }
 
             /**
@@ -152,13 +149,6 @@ public class MentaRewardAdUtils implements AdListener {
         vlionRewardedVideoAd.loadAd();
     }
 
-    public void onAdDestroy() {
-        if (null != vlionRewardedVideoAd) {
-            vlionRewardedVideoAd.destroy();
-            vlionRewardedVideoAd = null;
-        }
-    }
-
     @Override
     public void loadAd(AdStateListener adStateListener) {
         this.adStateListener = adStateListener;
@@ -175,7 +165,7 @@ public class MentaRewardAdUtils implements AdListener {
                 //AD_IMAGE_SCALING_CENTER_CROP 对标ImageView设置scaleType centerCrop
                 .setImageScale(VlionScaleType.AD_IMAGE_SCALING_CENTER_CROP)
                 .build();
-
+        loadRewardAd();
     }
 
     @Override
@@ -184,7 +174,7 @@ public class MentaRewardAdUtils implements AdListener {
             adStateListener.onError();
             return;
         }
-        loadRewardAd();
+        vlionRewardedVideoAd.showAd(mActivity);
     }
 
     @Override

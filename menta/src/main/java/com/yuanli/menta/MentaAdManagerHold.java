@@ -21,8 +21,8 @@ public class MentaAdManagerHold {
     public static void init(Application application, MentaBean mentaBean){
         OaidUtils.getOaid(application,(oaid)->{
             Log.d("TAG", "init: oaid" + oaid);
-            initMentaAd(application,oaid);
             InitUtils.init(mentaBean);
+            initMentaAd(application,oaid);
         });
     }
     public static void initMentaAd(Application application,String oaid) {
