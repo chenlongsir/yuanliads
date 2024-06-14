@@ -29,6 +29,10 @@ allprojects {
         maven {
             url 'https://artifact.bytedance.com/repository/pangle'
         }
+        maven {
+            url 'http://sdk.mentamob.com/repository/vlion/'
+            allowInsecureProtocol = true
+        }
     }
 }
 

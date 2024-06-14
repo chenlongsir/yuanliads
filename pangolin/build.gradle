@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'maven-publish'
 }
 
 android {
-    compileSdkVersion 33
+    namespace 'com.yuanli.pangolin'
+    compileSdkVersion 34
+
     defaultConfig {
         minSdkVersion 21
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -22,24 +23,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.yuanli.ad'
-                artifactId = 'yuanliads'
-                version = '1.3.0'
-            }
-        }
-    }
 }
 
 dependencies {
-    implementation project(':pangolin')
-    implementation project(':menta')
+
+    implementation project(':base')
+    implementation "com.pangle.cn:mediation-sdk:6.1.2.5"  //融合SDK
+
 }
