@@ -19,9 +19,11 @@ public class MentaRewardAdUtils implements AdListener {
     private Activity mActivity;
     private VlionRewardedVideoAd vlionRewardedVideoAd;
     private AdStateListener adStateListener;
+    private boolean isVertical;
 
-    public MentaRewardAdUtils(Activity activity) {
+    public MentaRewardAdUtils(Activity activity,boolean isVertical) {
         mActivity = activity;
+        this.isVertical = isVertical;
     }
 
     private void loadRewardAd() {
@@ -152,13 +154,13 @@ public class MentaRewardAdUtils implements AdListener {
     @Override
     public void loadAd(AdStateListener adStateListener) {
         this.adStateListener = adStateListener;
+
         int width = mActivity.getResources().getDisplayMetrics().widthPixels;
         int height = mActivity.getResources().getDisplayMetrics().heightPixels;
         vlionSlotConfig = new VlionSlotConfig.Builder()
                 .setSlotID(InitUtils.getBean().getRewardId())
-                .setSize(width, height) //模版广告尺寸宽高，单位px
+                .setSize(isVertical ? width : height,isVertical? height : width) //模版广告尺寸宽高，单位px
                 .setTolerateTime(5f)//广告加载容忍时间1f~5f。如果设定的时间内没有竞价到广告，则判断竞价失败
-
                 //设置图片的填充方式
                 //AD_IMAGE_SCALING_FITCENTER   对标ImageView设置scaleType 的fitCenter
                 //AD_IMAGE_SCALING_FITXY			 对标ImageView设置scaleType fitXY
