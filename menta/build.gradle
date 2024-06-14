@@ -22,7 +22,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.yuanli.ad'
+                groupId = 'com.yuanli.menta'
                 artifactId = 'menta'
                 version = '1.0.0'
             }

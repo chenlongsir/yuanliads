@@ -30,7 +30,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.yuanli.ad'
+                groupId = 'com.yuanli.pangolin'
                 artifactId = 'pangolin'
                 version = '1.0.0'
             }
