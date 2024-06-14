@@ -27,10 +27,6 @@ public class InsertAdUtils implements AdListener {
         this.activity = activity;
     }
 
-    private void initAdConfig(Context context) {
-        TTAdManagerHolder.get().requestPermissionIfNecessary(context);
-    }
-
     public void loadAd(final AdStateListener stateListener) {
         InsertAdUtils.this.stateListener = stateListener;
 
@@ -87,7 +83,7 @@ public class InsertAdUtils implements AdListener {
                 Log.d(AdConstants.TAG, "InterstitialFull onFullScreenVideoLoaded");
                 mTTFullScreenVideoAd = ad;
                 stateListener.stopLoading();
-                stateListener.real();
+                stateListener.real(InsertAdUtils.this);
             }
 
             public void onFullScreenVideoCached() {
@@ -98,7 +94,7 @@ public class InsertAdUtils implements AdListener {
                 Log.d(AdConstants.TAG, "InterstitialFull onFullScreenVideoCached");
                 mTTFullScreenVideoAd = ad;
                 stateListener.stopLoading();
-                stateListener.real();
+                stateListener.real(InsertAdUtils.this);
             }
         };
         this.mFullScreenVideoAdInteractionListener = new TTFullScreenVideoAd.FullScreenVideoAdInteractionListener() {

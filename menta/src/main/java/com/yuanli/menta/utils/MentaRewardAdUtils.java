@@ -56,7 +56,7 @@ public class MentaRewardAdUtils implements AdListener {
             public void onAdRenderSuccess() {
                 Log.d(TAG, "onAdRenderSuccess: ");
                 adStateListener.stopLoading();
-                adStateListener.real();
+                adStateListener.real(MentaRewardAdUtils.this);
             }
 
             /**

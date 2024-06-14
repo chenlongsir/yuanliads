@@ -55,7 +55,7 @@ public class MentaInsertAdUtils implements AdListener {
             @Override
             public void onAdRenderSuccess() {
                 adStateListener.stopLoading();
-                adStateListener.real();
+                adStateListener.real(MentaInsertAdUtils.this);
             }
 
             /**

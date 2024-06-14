@@ -1,7 +1,6 @@
 package com.yuanli.pangolin.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -25,10 +24,6 @@ public class RewardAdUtils implements AdListener {
 
     public RewardAdUtils(Activity activity){
         this.activity = activity;
-    }
-
-    private void initAdConfig(Context context) {
-        TTAdManagerHolder.get().requestPermissionIfNecessary(context);
     }
 
     public void loadAd(final AdStateListener adStateListener){
@@ -81,7 +76,7 @@ public class RewardAdUtils implements AdListener {
                 Log.i(AdConstants.TAG, "reward load success");
                 mTTRewardVideoAd = ttRewardVideoAd;
                 adStateListener.stopLoading();
-                adStateListener.real();
+                adStateListener.real(RewardAdUtils.this);
             }
 
             @Override
@@ -94,7 +89,7 @@ public class RewardAdUtils implements AdListener {
                 Log.i(AdConstants.TAG, "reward cached success 2");
                 mTTRewardVideoAd = ttRewardVideoAd;
                 adStateListener.stopLoading();
-                adStateListener.real();
+                adStateListener.real(RewardAdUtils.this);
             }
         };
         this.mRewardVideoAdInteractionListener = new TTRewardVideoAd.RewardAdInteractionListener() {

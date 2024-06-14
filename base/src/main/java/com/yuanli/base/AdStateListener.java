@@ -1,7 +1,7 @@
 package com.yuanli.base;
 
 public interface AdStateListener {
-    void real();
+    void real(AdListener adListener);
     void success();
     void onError();
     void loading();
