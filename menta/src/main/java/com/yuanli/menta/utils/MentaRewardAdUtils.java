@@ -20,6 +20,10 @@ public class MentaRewardAdUtils implements AdListener {
     private VlionRewardedVideoAd vlionRewardedVideoAd;
     private AdStateListener adStateListener;
     private boolean isVertical;
+    public MentaRewardAdUtils(Activity activity) {
+        mActivity = activity;
+        this.isVertical = false;
+    }
 
     public MentaRewardAdUtils(Activity activity,boolean isVertical) {
         mActivity = activity;
