@@ -34,6 +34,8 @@ public class MentaRewardAdUtils implements AdListener {
         adStateListener.loading();
         vlionRewardedVideoAd = new VlionRewardedVideoAd(mActivity, vlionSlotConfig);
         vlionRewardedVideoAd.setVlionRewardVideoListener(new VlionRewardVideoListener() {
+
+            private boolean isLoadSuccess = false;
             /**
              *  激励视频加载成功
              */
@@ -125,6 +127,7 @@ public class MentaRewardAdUtils implements AdListener {
             @Override
             public void onAdReward() {
                 Log.d(TAG, "onAdReward: ");
+                isLoadSuccess = true;
                 adStateListener.success();
             }
             /**
@@ -149,6 +152,9 @@ public class MentaRewardAdUtils implements AdListener {
             public void onAdClose() {
                 Log.d(TAG, "onAdClose: ");
                 adStateListener.onClose();
+                if (isLoadSuccess){
+                    adStateListener.successClose();
+                }
             }
         });
         //加载广告

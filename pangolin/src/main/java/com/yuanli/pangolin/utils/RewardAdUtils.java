@@ -21,7 +21,7 @@ public class RewardAdUtils implements AdListener {
     private TTAdNative.RewardVideoAdListener mRewardVideoListener; // 广告加载监听器
     private TTRewardVideoAd.RewardAdInteractionListener mRewardVideoAdInteractionListener; // 广告展示监听器
     private AdStateListener adStateListener;
-
+    private boolean isLoadSuccess = false;
     public RewardAdUtils(Activity activity){
         this.activity = activity;
     }
@@ -63,6 +63,7 @@ public class RewardAdUtils implements AdListener {
     }
 
     private void initListeners() {
+        isLoadSuccess = false;
         this.mRewardVideoListener = new TTAdNative.RewardVideoAdListener() {
             @Override
             public void onError(int i, String s) {
@@ -107,6 +108,9 @@ public class RewardAdUtils implements AdListener {
             public void onAdClose() {
                 Log.i(AdConstants.TAG, "reward close");
                 adStateListener.onClose();
+                if (isLoadSuccess){
+                    adStateListener.successClose();
+                }
             }
 
             @Override
@@ -128,6 +132,7 @@ public class RewardAdUtils implements AdListener {
             public void onRewardArrived(boolean b, int i, Bundle bundle) {
                 Log.i(AdConstants.TAG, "reward onRewardArrived");
                 adStateListener.success();
+                isLoadSuccess = true;
             }
 
             @Override

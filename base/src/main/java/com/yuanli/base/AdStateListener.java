@@ -7,6 +7,10 @@ public interface AdStateListener {
     default void onClose(){
 
     };
+
+    default void successClose(){
+
+    };
     void loading();
     void stopLoading();
    default void toast(String msg){
