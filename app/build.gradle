@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.library'
+    id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
 
@@ -33,5 +33,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.2.0"
     implementation project(path :':pangolin')
     implementation project(path :':menta')
+    implementation project(path :':baidu')
+    implementation project(path :':ks')
+    implementation project(path :':ylh')
     implementation project(':base')
 }
