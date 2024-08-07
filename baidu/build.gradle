@@ -17,7 +17,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.yuanli.baidu'
+                artifactId = 'baidu'
+            }
+        }
+    }
+}
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

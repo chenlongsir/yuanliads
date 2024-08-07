@@ -5,6 +5,7 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="D:/mygradle/gradle-6.1" />
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
@@ -12,7 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/baidu" />
             <option value="$PROJECT_DIR$/base" />
-            <option value="$PROJECT_DIR$/ksads" />
+            <option value="$PROJECT_DIR$/ks" />
             <option value="$PROJECT_DIR$/menta" />
             <option value="$PROJECT_DIR$/pangolin" />
             <option value="$PROJECT_DIR$/ylh" />
