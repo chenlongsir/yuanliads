@@ -10,7 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baidu" />
             <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/ksads" />
             <option value="$PROJECT_DIR$/menta" />
             <option value="$PROJECT_DIR$/pangolin" />
           </set>

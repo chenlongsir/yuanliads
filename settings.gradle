@@ -1,5 +1,8 @@
 rootProject.name = "pangolinads"
+
 include ':app'
 include ':menta'
 include ':base'
 include ':pangolin'
+include ':baidu'
+include ':ksAds'
