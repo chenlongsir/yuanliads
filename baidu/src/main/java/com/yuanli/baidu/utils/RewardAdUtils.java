@@ -3,8 +3,6 @@ package com.yuanli.baidu.utils;
 import static com.yuanli.baidu.constants.BaiduConstants.TAG;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.baidu.mobads.sdk.api.RewardVideoAd;
 import com.yuanli.baidu.BaiduManagerHolder;
