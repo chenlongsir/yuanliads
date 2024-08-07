@@ -33,5 +33,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":base")
-    api 'mobi.baidu.sdk:mobads:9.36'
+    implementation 'mobi.baidu.sdk:mobads:9.36'
 }

@@ -4,8 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.yuanli.base'
-    compileSdkVersion 34
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 21
