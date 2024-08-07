@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.yuanli.ylh">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yuanli.ylh">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application>
-        <activity
-            android:name="com.qq.e.ads.PortraitADActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
-        <activity
-            android:name="com.qq.e.ads.LandscapeADActivity"
-            android:screenOrientation="landscape"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <provider
             android:name="com.qq.e.comm.GDTFileProvider"
