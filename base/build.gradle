@@ -33,7 +33,6 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.yuanli.base'
                 artifactId = 'base'
-                version = '1.0.0'
             }
         }
     }
@@ -41,6 +40,7 @@ afterEvaluate {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation "androidx.appcompat:appcompat:1.2.0"
 
 }

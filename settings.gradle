@@ -1,4 +1,5 @@
 rootProject.name = "pangolinads"
+
 include ':app'
 include ':menta'
 include ':base'
