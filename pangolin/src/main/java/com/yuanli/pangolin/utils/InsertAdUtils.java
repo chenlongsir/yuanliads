@@ -1,7 +1,6 @@
 package com.yuanli.pangolin.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
@@ -10,12 +9,12 @@ import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot;
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
 import com.yuanli.pangolin.constants.AdConstants;
 import com.yuanli.pangolin.holder.TTAdManagerHolder;
 
-public class InsertAdUtils implements AdListener {
+public class InsertAdUtils implements Ad {
     private Activity activity;
     private TTAdNative mTTAdNative;
     private TTFullScreenVideoAd mTTFullScreenVideoAd; // 插全屏广告对象

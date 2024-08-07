@@ -39,7 +39,6 @@ afterEvaluate {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
     // 快手SDK aar包，请将提供的aar包拷贝到libs目录下，添加依赖。根据接入版本修改SDK包名
     compileOnly  files('libs/kssdk-ad-3.3.66-publishRelease.aar')
     implementation project(":base")

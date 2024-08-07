@@ -2,11 +2,9 @@ package com.yuanli.menta.utils;
 
 import android.app.Activity;
 
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
-import com.yuanli.menta.MentaAdBack;
 import com.yuanli.menta.MentaAdManagerHold;
-import com.yuanli.menta.constants.MentaConstants;
 
 import cn.vlion.ad.inland.base.util.config.VlionScaleType;
 import cn.vlion.ad.inland.core.config.VlionAdError;
@@ -14,7 +12,7 @@ import cn.vlion.ad.inland.core.config.VlionSlotConfig;
 import cn.vlion.ad.inland.core.interstitial.VlionInterstitialAd;
 import cn.vlion.ad.inland.core.interstitial.VlionInterstitialListener;
 
-public class MentaInsertAdUtils implements AdListener {
+public class MentaInsertAdUtils implements Ad {
     private VlionSlotConfig vlionSlotConfig;
     private Activity mActivity;
     private VlionInterstitialAd vlionInterstitialAd;

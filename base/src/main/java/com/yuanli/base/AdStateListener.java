@@ -2,21 +2,23 @@ package com.yuanli.base;
 
 public interface AdStateListener {
     /*
-    * 绑定接口到
+    * 初始化成功之后回调接口
     * */
-    void real(AdListener adListener);
+    default void real(Ad ad){
+        ad.showAd();
+    }
     void success();
     void onError();
     default void onClose(){
 
-    };
+    }
 
     default void successClose(){
 
-    };
+    }
     void loading();
     void stopLoading();
    default void toast(String msg){
 
-   };
+   }
 }

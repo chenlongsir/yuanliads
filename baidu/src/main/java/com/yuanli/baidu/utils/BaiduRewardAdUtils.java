@@ -7,10 +7,10 @@ import android.util.Log;
 
 import com.baidu.mobads.sdk.api.RewardVideoAd;
 import com.yuanli.baidu.BaiduManagerHolder;
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
 
-public class BaiduRewardAdUtils implements AdListener {
+public class BaiduRewardAdUtils implements Ad {
     private Activity activity;
     private AdStateListener adStateListener;
     private boolean isLoadSuccess = false;

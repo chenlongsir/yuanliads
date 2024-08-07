@@ -10,14 +10,14 @@ import com.kwad.sdk.api.KsAdSDK;
 import com.kwad.sdk.api.KsLoadManager;
 import com.kwad.sdk.api.KsRewardVideoAd;
 import com.kwad.sdk.api.KsScene;
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
 import com.yuanli.ksads.KsManagerHolder;
 import com.yuanli.ksads.constants.KsConstants;
 
 import java.util.List;
 
-public class KsRewardAdUtils implements AdListener {
+public class KsRewardAdUtils implements Ad {
     private Activity activity;
     private AdStateListener adStateListener;
     private boolean isLoadSuccess = false;

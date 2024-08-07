@@ -3,7 +3,7 @@ package com.yuanli.menta.utils;
 import android.app.Activity;
 import android.util.Log;
 
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
 import com.yuanli.menta.MentaAdManagerHold;
 
@@ -13,7 +13,7 @@ import cn.vlion.ad.inland.core.config.VlionSlotConfig;
 import cn.vlion.ad.inland.core.reward.VlionRewardVideoListener;
 import cn.vlion.ad.inland.core.reward.VlionRewardedVideoAd;
 
-public class MentaRewardAdUtils implements AdListener {
+public class MentaRewardAdUtils implements Ad {
     private static final String TAG = "MentaRewardAdUtils";
     private VlionSlotConfig vlionSlotConfig;
     private Activity mActivity;

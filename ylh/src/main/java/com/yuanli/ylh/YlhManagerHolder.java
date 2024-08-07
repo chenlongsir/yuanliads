@@ -9,8 +9,6 @@ import com.yuanli.ylh.utils.InitUtils;
 
 public class YlhManagerHolder {
     private static boolean sInit;
-    private static boolean isFail;
-    private static InitListener initListener;
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
@@ -20,24 +18,8 @@ public class YlhManagerHolder {
         doInit(context);
     }
 
-
-    public interface InitListener{
-        void onSuccess();
-        void onError(String msg);
-    }
-
-    public static void setInitListener(InitListener initListener){
-        YlhManagerHolder.initListener = initListener;
-        if (sInit){
-            initListener.onSuccess();
-        }else if (isFail){
-            doInit(context);
-        }
-    }
-
     // 清除回调，避免内存泄漏
     public static void clear(){
-        initListener = null;
     }
 
 
@@ -49,7 +31,8 @@ public class YlhManagerHolder {
     }
 
     public static void initKSSDK(Context appContext) {
-        GDTAdSdk.init(context,InitUtils.getBean().getAppId());
+        GDTAdSdk.init(appContext,InitUtils.getBean().getAppId());
+        sInit = true;
     }
 
 }

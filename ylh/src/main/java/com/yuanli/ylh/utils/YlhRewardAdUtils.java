@@ -8,14 +8,14 @@ import android.widget.Toast;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.comm.util.AdError;
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
 import com.yuanli.ylh.YlhManagerHolder;
 import com.yuanli.ylh.constants.YlhConstants;
 
 import java.util.Map;
 
-public class YlhRewardAdUtils implements AdListener {
+public class YlhRewardAdUtils implements Ad {
     private Activity activity;
     private AdStateListener adStateListener;
     private boolean isLoadSuccess = false;
@@ -28,21 +28,10 @@ public class YlhRewardAdUtils implements AdListener {
     public void loadAd(final AdStateListener adStateListener) {
         isLoadSuccess = false;
         YlhRewardAdUtils.this.adStateListener = adStateListener;
-        YlhManagerHolder.setInitListener(new YlhManagerHolder.InitListener() {
-            @Override
-            public void onSuccess() {
-                adStateListener.loading();
-                rewardVideoAD = new RewardVideoAD(activity, InitUtils.getBean().getRewardId(), rewardAdInteractionListener);
-                rewardVideoAD.loadAD();
-            }
 
-            @Override
-            public void onError(String msg) {
-                adStateListener.stopLoading();
-                adStateListener.onError();
-                adStateListener.toast(msg);
-            }
-        });
+        adStateListener.loading();
+        rewardVideoAD = new RewardVideoAD(activity, InitUtils.getBean().getRewardId(), rewardAdInteractionListener);
+        rewardVideoAD.loadAD();
     }
 
     private final RewardVideoADListener rewardAdInteractionListener = new RewardVideoADListener() {

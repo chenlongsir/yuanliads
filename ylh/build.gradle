@@ -5,7 +5,6 @@ plugins {
 
 android {
     compileSdkVersion 33
-
     defaultConfig {
         minSdkVersion 21
 
@@ -38,7 +37,6 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation project(":base")
     api 'com.qq.e.union:union:4.542.1412'
 }

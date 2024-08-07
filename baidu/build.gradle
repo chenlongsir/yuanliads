@@ -31,9 +31,7 @@ afterEvaluate {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:1.2.0"
 
     implementation project(":base")
-
-    implementation 'mobi.baidu.sdk:mobads:9.36'
+    api 'mobi.baidu.sdk:mobads:9.36'
 }

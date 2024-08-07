@@ -3,17 +3,17 @@ package com.yuanli.pangolin.utils;
 import android.app.Activity;
 
 
-import com.yuanli.base.AdListener;
+import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class InsertOrRewardUtils implements AdListener {
+public class InsertOrRewardUtils implements Ad {
 
-    private AdListener adUtils;
+    private Ad adUtils;
 
-    private Map<AdType,AdListener> map = new HashMap<>();
+    private Map<AdType, Ad> map = new HashMap<>();
 
     public InsertOrRewardUtils(Activity activity, AdType adType) {
         map.put(AdType.INSERT,new InsertAdUtils(activity));
