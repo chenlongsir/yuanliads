@@ -3,7 +3,6 @@ package com.yuanli.baidu.utils;
 import static com.yuanli.baidu.constants.BaiduConstants.TAG;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.baidu.mobads.sdk.api.RewardVideoAd;
@@ -11,24 +10,25 @@ import com.yuanli.baidu.BaiduManagerHolder;
 import com.yuanli.base.AdListener;
 import com.yuanli.base.AdStateListener;
 
-public class RewardAdUtils implements AdListener {
+public class BaiduRewardAdUtils implements AdListener {
     private Activity activity;
     private AdStateListener adStateListener;
     private boolean isLoadSuccess = false;
     private RewardVideoAd rewardVideoAd;
 
-    public RewardAdUtils(Activity activity){
+    public BaiduRewardAdUtils(Activity activity){
         this.activity = activity;
     }
 
     public void loadAd(final AdStateListener adStateListener){
-        RewardAdUtils.this.adStateListener = adStateListener;
+        BaiduRewardAdUtils.this.adStateListener = adStateListener;
         BaiduManagerHolder.setInitListener(new BaiduManagerHolder.InitListener() {
             @Override
             public void onSuccess() {
                 if (rewardVideoAd == null){
                     rewardVideoAd = new RewardVideoAd(activity, InitUtils.getBean().getRewardId(), rewardListener);
                 }
+                adStateListener.real(BaiduRewardAdUtils.this);
             }
 
             @Override

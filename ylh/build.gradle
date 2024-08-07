@@ -1,13 +1,16 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 android {
     compileSdkVersion 33
+
     defaultConfig {
         minSdkVersion 21
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -22,15 +25,20 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.yuanli.ylh'
+                artifactId = 'ylh'
+            }
+        }
+    }
+}
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
-
-    implementation "androidx.appcompat:appcompat:1.2.0"
-    implementation project(path :':pangolin')
-    implementation project(path :':menta')
-    implementation project(path :':ksads')
-    implementation project(path :':baidu')
-    implementation project(':base')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(":base")
+    api 'com.qq.e.union:union:4.542.1412'
 }

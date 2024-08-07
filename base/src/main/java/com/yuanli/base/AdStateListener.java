@@ -1,6 +1,9 @@
 package com.yuanli.base;
 
 public interface AdStateListener {
+    /*
+    * 绑定接口到
+    * */
     void real(AdListener adListener);
     void success();
     void onError();

@@ -1,12 +1,12 @@
-package com.yuanli.ksads.constants;
+package com.yuanli.ylh.constants;
 
-public class KsBean  {
+public class YlhBean {
 
     private final String appId;
     private final String appName;
     private final long rewardId;
 
-    public KsBean(String appId,String appName, long rewardId) {
+    public YlhBean(String appId, String appName, long rewardId) {
         this.appId = appId;
         this.appName = appName;
         this.rewardId = rewardId;
