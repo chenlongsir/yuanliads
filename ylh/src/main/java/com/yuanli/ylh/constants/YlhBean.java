@@ -4,9 +4,9 @@ public class YlhBean {
 
     private final String appId;
     private final String appName;
-    private final long rewardId;
+    private final String rewardId;
 
-    public YlhBean(String appId, String appName, long rewardId) {
+    public YlhBean(String appId, String appName, String rewardId) {
         this.appId = appId;
         this.appName = appName;
         this.rewardId = rewardId;
@@ -19,7 +19,7 @@ public class YlhBean {
         return appName;
     }
 
-    public long getRewardId() {
+    public String getRewardId() {
         return rewardId;
     }
 

@@ -2,9 +2,8 @@ package com.yuanli.ylh;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 
-import com.yuanli.base.BuildConfig;
+import com.qq.e.comm.managers.GDTAdSdk;
 import com.yuanli.ylh.constants.YlhBean;
 import com.yuanli.ylh.utils.InitUtils;
 
@@ -14,13 +13,6 @@ public class YlhManagerHolder {
     private static InitListener initListener;
     @SuppressLint("StaticFieldLeak")
     private static Context context;
-
-    public static KsLoadManager get() {
-        if (!sInit) {
-            throw new RuntimeException("TTAdSdk is not init, please check.");
-        }
-        return KsAdSDK.getLoadManager();
-    }
 
     public static void init(Context context, YlhBean bean) {
         YlhManagerHolder.context = context;
@@ -57,20 +49,7 @@ public class YlhManagerHolder {
     }
 
     public static void initKSSDK(Context appContext) {
-//        4.560.1430及以后版本
-        GDTAdSdk.initWithoutStart(appContext, "您在腾讯联盟开发者平台的APPID"); // 该接口不会采集用户信息
-// 调用initWithoutStart后请尽快调用start，否则可能影响广告填充，造成收入下降
-        GDTAdSdk.start(new GDTAdSdk.OnStartListener() {
-            @Override
-            public void onStartSuccess() {
-                // 推荐开发者在onStartSuccess回调后开始拉广告
-            }
-
-            @Override
-            public void onStartFailed(Exception e) {
-                Log.e("gdt onStartFailed:", e.toString());
-            }
-        });
+        GDTAdSdk.init(context,InitUtils.getBean().getAppId());
     }
 
 }
