@@ -67,14 +67,14 @@ public class RewardAdUtils implements Ad {
         this.mRewardVideoListener = new TTAdNative.RewardVideoAdListener() {
             @Override
             public void onError(int i, String s) {
-                Log.i(AdConstants.TAG, "reward load fail: errCode: " + i + ", errMsg: " + s);
+                Log.d(AdConstants.TAG, "reward load fail: errCode: " + i + ", errMsg: " + s);
                 adStateListener.stopLoading();
                 adStateListener.onError();
             }
 
             @Override
             public void onRewardVideoAdLoad(TTRewardVideoAd ttRewardVideoAd) {
-                Log.i(AdConstants.TAG, "reward load success");
+                Log.d(AdConstants.TAG, "reward load success");
                 mTTRewardVideoAd = ttRewardVideoAd;
                 adStateListener.stopLoading();
                 adStateListener.real(RewardAdUtils.this);
@@ -82,12 +82,12 @@ public class RewardAdUtils implements Ad {
 
             @Override
             public void onRewardVideoCached() {
-                Log.i(AdConstants.TAG, "reward cached success");
+                Log.d(AdConstants.TAG, "reward cached success");
             }
 
             @Override
             public void onRewardVideoCached(TTRewardVideoAd ttRewardVideoAd) {
-                Log.i(AdConstants.TAG, "reward cached success 2");
+                Log.d(AdConstants.TAG, "reward cached success 2");
                 mTTRewardVideoAd = ttRewardVideoAd;
                 adStateListener.stopLoading();
                 adStateListener.real(RewardAdUtils.this);
@@ -96,17 +96,17 @@ public class RewardAdUtils implements Ad {
         this.mRewardVideoAdInteractionListener = new TTRewardVideoAd.RewardAdInteractionListener() {
             @Override
             public void onAdShow() {
-                Log.i(AdConstants.TAG, "reward show");
+                Log.d(AdConstants.TAG, "reward show");
             }
 
             @Override
             public void onAdVideoBarClick() {
-                Log.i(AdConstants.TAG, "reward click");
+                Log.d(AdConstants.TAG, "reward click");
             }
 
             @Override
             public void onAdClose() {
-                Log.i(AdConstants.TAG, "reward close");
+                Log.d(AdConstants.TAG, "reward close");
                 adStateListener.onClose();
                 if (isLoadSuccess){
                     adStateListener.successClose();
@@ -115,29 +115,29 @@ public class RewardAdUtils implements Ad {
 
             @Override
             public void onVideoComplete() {
-                Log.i(AdConstants.TAG, "reward onVideoComplete");
+                Log.d(AdConstants.TAG, "reward onVideoComplete");
             }
 
             @Override
             public void onVideoError() {
-                Log.i(AdConstants.TAG, "reward onVideoError");
+                Log.d(AdConstants.TAG, "reward onVideoError");
             }
 
             @Override
             public void onRewardVerify(boolean b, int i, String s, int i1, String s1) {
-                Log.i(AdConstants.TAG, "reward onRewardVerify");
+                Log.d(AdConstants.TAG, "reward onRewardVerify");
             }
 
             @Override
             public void onRewardArrived(boolean b, int i, Bundle bundle) {
-                Log.i(AdConstants.TAG, "reward onRewardArrived");
+                Log.d(AdConstants.TAG, "reward onRewardArrived");
                 adStateListener.success();
                 isLoadSuccess = true;
             }
 
             @Override
             public void onSkippedVideo() {
-                Log.i(AdConstants.TAG, "reward onSkippedVideo");
+                Log.d(AdConstants.TAG, "reward onSkippedVideo");
             }
         };
     }
@@ -146,7 +146,7 @@ public class RewardAdUtils implements Ad {
     @Override
     public void showAd() {
         if (mTTRewardVideoAd == null) {
-            Log.i(AdConstants.TAG, "请先加载广告或等待广告加载完毕后再调用show方法");
+            Log.d(AdConstants.TAG, "请先加载广告或等待广告加载完毕后再调用show方法");
             return;
         }
         /** 5、设置展示监听器，展示广告 */

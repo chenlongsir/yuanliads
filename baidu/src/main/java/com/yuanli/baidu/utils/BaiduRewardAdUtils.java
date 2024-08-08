@@ -64,7 +64,7 @@ public class BaiduRewardAdUtils implements Ad {
 
         @Override
         public void onAdFailed(String s) {
-            Log.e(TAG, "onAdFailed: " + s);
+            Log.d(TAG, "onAdFailed: " + s);
             adStateListener.onError();
         }
 

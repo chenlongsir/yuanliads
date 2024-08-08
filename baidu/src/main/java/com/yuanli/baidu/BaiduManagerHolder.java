@@ -69,7 +69,7 @@ public class BaiduManagerHolder {
                 .setBDAdInitListener(new BDAdConfig.BDAdInitListener() {
                     @Override
                     public void success() {
-                        Log.e(BaiduConstants.TAG,"SDK初始化成功");
+                        Log.d(BaiduConstants.TAG,"SDK初始化成功");
                         isFail = false;
                         sInit = true;
                         if (initListener != null){
@@ -79,7 +79,7 @@ public class BaiduManagerHolder {
 
                     @Override
                     public void fail() {
-                        Log.e(BaiduConstants.TAG,"SDK初始化失败");
+                        Log.d(BaiduConstants.TAG,"SDK初始化失败");
                         isFail = true;
                         if (initListener != null){
                             initListener.onError("SDK初始化失败");

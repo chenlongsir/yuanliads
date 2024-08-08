@@ -57,7 +57,7 @@ public class SplashAdUtils {
 
                     @Override
                     public void onSplashLoadFail(CSJAdError csjAdError) {
-                        Log.e(TAG, "开屏广告下载失败" + csjAdError.getMsg());
+                        Log.d(TAG, "开屏广告下载失败" + csjAdError.getMsg());
                         closeAd();
                     }
 
@@ -70,7 +70,7 @@ public class SplashAdUtils {
 
                     @Override
                     public void onSplashRenderFail(CSJSplashAd csjSplashAd, CSJAdError 			                                        csjAdError) {
-                        Log.e(TAG, "开屏广告加载超时");
+                        Log.d(TAG, "开屏广告加载超时");
                         closeAd();
                     }
                 }, AD_TIME_OUT);

@@ -62,7 +62,7 @@ public class TTAdManagerHolder {
             TTAdSdk.start(new TTAdSdk.Callback() {
                 @Override
                 public void success() {
-                    Log.i(TAG, "success: " + TTAdSdk.isInitSuccess());
+                    Log.d(TAG, "success: " + TTAdSdk.isInitSuccess());
                     isFail = false;
                     sInit = true;
                     if (initListener != null){
@@ -72,7 +72,7 @@ public class TTAdManagerHolder {
 
                 @Override
                 public void fail(int code, String msg) {
-                    Log.i(TAG, "fail:  code = " + code + " msg = " + msg);
+                    Log.d(TAG, "fail:  code = " + code + " msg = " + msg);
                     isFail = true;
                     if (initListener != null){
                         initListener.onError(msg);

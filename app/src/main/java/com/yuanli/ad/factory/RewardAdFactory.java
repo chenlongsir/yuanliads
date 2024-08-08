@@ -7,6 +7,8 @@ import com.yuanli.ad.AdType;
 import com.yuanli.baidu.utils.BaiduRewardAdUtils;
 import com.yuanli.base.Ad;
 import com.yuanli.ksads.utils.KsRewardAdUtils;
+import com.yuanli.menta.utils.MentaInsertAdUtils;
+import com.yuanli.menta.utils.MentaRewardAdUtils;
 import com.yuanli.pangolin.utils.RewardAdUtils;
 import com.yuanli.ylh.utils.YlhRewardAdUtils;
 
@@ -23,6 +25,8 @@ public class RewardAdFactory {
                 return new RewardAdUtils(activity);
             case AdTypeConstants.AD_TYPE_YLH:
                 return new YlhRewardAdUtils(activity);
+            case AdTypeConstants.AD_TYPE_MEN_TA:
+                return new MentaRewardAdUtils(activity);
         }
         return new RewardAdUtils(activity);
     }

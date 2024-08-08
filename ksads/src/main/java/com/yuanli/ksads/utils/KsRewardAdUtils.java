@@ -34,7 +34,7 @@ public class KsRewardAdUtils implements Ad {
             public void onSuccess() {
                 adStateListener.loading();
                 KsScene scene = new KsScene.Builder(InitUtils.getBean().getRewardId()).build(); // 此为测试posId，请联系快手平台申请正式posId
-                KsAdSDK.getLoadManager().loadRewardVideoAd(scene, new KsLoadManager.RewardVideoAdListener() {
+                KsManagerHolder.get().loadRewardVideoAd(scene, new KsLoadManager.RewardVideoAdListener() {
                     @Override
                     public void onError(int code, String msg) {
                         Log.d(KsConstants.TAG, "onError: " + msg);

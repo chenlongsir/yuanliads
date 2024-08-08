@@ -126,13 +126,13 @@ public class BannerAdUtils {
 
             @Override
             public void onRenderFail(View view, String msg, int code) {
-                Log.e("ExpressView","render fail:"+(System.currentTimeMillis() - startTime));
+                Log.d("ExpressView","render fail:"+(System.currentTimeMillis() - startTime));
                 Log.d(TAG, "onRenderFail: "+code);
             }
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
-                Log.e("ExpressView","render suc:"+(System.currentTimeMillis() - startTime));
+                Log.d("ExpressView","render suc:"+(System.currentTimeMillis() - startTime));
                 Log.d(TAG, "onRenderSuccess: 渲染成功");
                 //返回view的宽高 单位 dp
                 mExpressContainer.setVisibility(View.VISIBLE);

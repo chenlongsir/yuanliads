@@ -70,7 +70,7 @@ public class KsManagerHolder {
                     @Override
                     public void onSuccess() {
                         // 启动成功后再获取SDK
-                        Log.i(KsConstants.TAG, "start success");
+                        Log.d(KsConstants.TAG, "start success");
                         isFail = false;
                         sInit = true;
                         if (initListener != null){
@@ -80,14 +80,15 @@ public class KsManagerHolder {
 
                     @Override
                     public void onFail(int code, String msg) {
-                        Log.i(KsConstants.TAG, "start fail msg: " + msg);
+                        Log.d(KsConstants.TAG, "start fail msg: " + msg);
                         isFail = true;
-                        if (initListener != null){
+                        if (initListener != null) {
                             initListener.onError("SDK初始化失败");
                         }
                     }
                 })
                 .build());
+        KsAdSDK.start();
     }
 
 }
