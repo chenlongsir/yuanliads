@@ -1,5 +1,6 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
+    id 'maven-publish'
 }
 
 android {
@@ -21,7 +22,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.yuanli.ad'
+                artifactId = 'ad'
+            }
+        }
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
