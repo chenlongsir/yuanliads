@@ -80,9 +80,7 @@ public class YlhRewardAdUtils implements Ad {
         public void onADClose() {
             Log.d(YlhConstants.TAG, "onADClose: ");
             adStateListener.success();
-            if (isLoadSuccess) {
-                adStateListener.successClose();
-            }
+            adStateListener.successClose();
         }
 
         @Override
