@@ -37,19 +37,19 @@ public class KsRewardAdUtils implements Ad {
                 KsAdSDK.getLoadManager().loadRewardVideoAd(scene, new KsLoadManager.RewardVideoAdListener() {
                     @Override
                     public void onError(int code, String msg) {
-                        Log.e(KsConstants.TAG, "onError: " + msg);
+                        Log.d(KsConstants.TAG, "onError: " + msg);
                         adStateListener.onError();
                         adStateListener.stopLoading();
                     }
 
                     @Override
                     public void onRewardVideoResult(@Nullable List<KsRewardVideoAd> adList) {
-                        Log.e(KsConstants.TAG, "onRewardVideoResult: ");
+                        Log.d(KsConstants.TAG, "onRewardVideoResult: ");
                     }
 
                     @Override
                     public void onRewardVideoAdLoad(@Nullable List<KsRewardVideoAd> adList) {
-                        Log.e(KsConstants.TAG, "onRewardVideoAdLoad: ");
+                        Log.d(KsConstants.TAG, "onRewardVideoAdLoad: ");
                         if (adList != null && adList.size() > 0) {
                             mRewardVideoAd = adList.get(0);
                             adStateListener.stopLoading();

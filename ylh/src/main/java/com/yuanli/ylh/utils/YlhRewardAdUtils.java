@@ -28,7 +28,6 @@ public class YlhRewardAdUtils implements Ad {
     public void loadAd(final AdStateListener adStateListener) {
         isLoadSuccess = false;
         YlhRewardAdUtils.this.adStateListener = adStateListener;
-
         adStateListener.loading();
         rewardVideoAD = new RewardVideoAD(activity, InitUtils.getBean().getRewardId(), rewardAdInteractionListener);
         rewardVideoAD.loadAD();

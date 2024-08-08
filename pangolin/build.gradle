@@ -42,6 +42,6 @@ dependencies {
 
     implementation project(path :':base')
 
-    implementation "com.pangle.cn:mediation-sdk:6.1.2.5"  //融合SDK
+    api "com.pangle.cn:mediation-sdk:6.1.2.5"  //融合SDK
 
 }

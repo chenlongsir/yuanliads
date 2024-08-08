@@ -1,9 +1,9 @@
 package com.yuanli.ad;
 
-import static com.yuanli.ad.AdConstants.AD_TYPE_BAIDU;
-import static com.yuanli.ad.AdConstants.AD_TYPE_KS;
-import static com.yuanli.ad.AdConstants.AD_TYPE_PANGOLIN;
-import static com.yuanli.ad.AdConstants.AD_TYPE_YLH;
+import static com.yuanli.ad.AdTypeConstants.AD_TYPE_BAIDU;
+import static com.yuanli.ad.AdTypeConstants.AD_TYPE_KS;
+import static com.yuanli.ad.AdTypeConstants.AD_TYPE_PANGOLIN;
+import static com.yuanli.ad.AdTypeConstants.AD_TYPE_YLH;
 
 import androidx.annotation.IntDef;
 

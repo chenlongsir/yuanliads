@@ -1,6 +1,6 @@
 package com.yuanli.ad;
 
-public class AdConstants {
+public class AdTypeConstants {
 
     public final static int AD_TYPE_PANGOLIN = 1;
     public final static int AD_TYPE_BAIDU = 2;

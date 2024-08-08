@@ -38,5 +38,5 @@ afterEvaluate {
 
 dependencies {
     implementation project(":base")
-    implementation 'com.qq.e.union:union:4.542.1412'
+    api 'com.qq.e.union:union:4.542.1412'
 }
