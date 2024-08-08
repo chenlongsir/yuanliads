@@ -28,7 +28,8 @@ public class BaiduRewardAdUtils implements Ad {
                 if (rewardVideoAd == null){
                     rewardVideoAd = new RewardVideoAd(activity, InitUtils.getBean().getRewardId(), rewardListener);
                 }
-                adStateListener.real(BaiduRewardAdUtils.this);
+                adStateListener.loading();
+                rewardVideoAd.load();
             }
 
             @Override
@@ -70,10 +71,12 @@ public class BaiduRewardAdUtils implements Ad {
         @Override
         public void onVideoDownloadSuccess() {
             Log.d(TAG, "onVideoDownloadSuccess: ");
+            adStateListener.real(BaiduRewardAdUtils.this);
         }
 
         @Override
         public void onVideoDownloadFailed() {
+            adStateListener.onError();
             Log.d(TAG, "onVideoDownloadFailed: ");
 
         }
@@ -109,8 +112,7 @@ public class BaiduRewardAdUtils implements Ad {
 
     @Override
     public void showAd() {
-        adStateListener.loading();
-        rewardVideoAd.load();
+        rewardVideoAd.show();
     }
 
     @Override

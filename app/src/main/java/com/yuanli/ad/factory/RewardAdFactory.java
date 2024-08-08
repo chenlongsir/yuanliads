@@ -24,6 +24,6 @@ public class RewardAdFactory {
             case AdConstants.AD_TYPE_YLH:
                 return new YlhRewardAdUtils(activity);
         }
-        return null;
+        return new RewardAdUtils(activity);
     }
 }
