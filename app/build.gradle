@@ -43,5 +43,5 @@ dependencies {
     api project(path :':ksads')
     api project(path :':baidu')
     api project(path :':ylh')
-    implementation project(':base')
+    api project(':base')
 }
