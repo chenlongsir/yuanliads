@@ -62,7 +62,7 @@ public class YlhRewardAdUtils implements Ad {
         @Override
         public void onReward(Map<String, Object> map) {
             Logger.i(YlhConstants.TAG, "onReward: ");
-
+            isLoadSuccess = true;
         }
 
         @Override
@@ -74,11 +74,6 @@ public class YlhRewardAdUtils implements Ad {
         @Override
         public void onVideoComplete() {
             Logger.i(YlhConstants.TAG, "onVideoComplete: ");
-            isLoadSuccess = true;
-            if (adStateListener != null){
-                adStateListener.success();
-                adStateListener.successClose();
-            }
         }
 
         @Override
@@ -86,6 +81,8 @@ public class YlhRewardAdUtils implements Ad {
             Logger.i(YlhConstants.TAG, "onADClose: ");
             if (adStateListener != null){
                 adStateListener.onClose();
+                adStateListener.success();
+                adStateListener.successClose();
             }
         }
 
