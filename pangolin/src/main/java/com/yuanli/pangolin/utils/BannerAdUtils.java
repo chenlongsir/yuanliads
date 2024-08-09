@@ -2,7 +2,6 @@ package com.yuanli.pangolin.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import com.bytedance.sdk.openadsdk.TTAdDislike;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.yuanli.base.log.Logger;
 import com.yuanli.pangolin.holder.TTAdManagerHolder;
 import com.yuanli.pangolin.widget.DislikeDialog;
 
@@ -116,27 +116,27 @@ public class BannerAdUtils {
         ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
             @Override
             public void onAdClicked(View view, int type) {
-                Log.d(TAG, "onAdClicked: 广告被点击");
+                Logger.i(TAG, "onAdClicked: 广告被点击");
             }
 
             @Override
             public void onAdShow(View view, int type) {
-                Log.d(TAG, "onAdShow: 广告展示");
+                Logger.i(TAG, "onAdShow: 广告展示");
             }
 
             @Override
             public void onRenderFail(View view, String msg, int code) {
-                Log.d("ExpressView","render fail:"+(System.currentTimeMillis() - startTime));
-                Log.d(TAG, "onRenderFail: "+code);
+                Logger.i("ExpressView", "render fail:" + (System.currentTimeMillis() - startTime));
+                Logger.i(TAG, "onRenderFail: " + code);
             }
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
-                Log.d("ExpressView","render suc:"+(System.currentTimeMillis() - startTime));
-                Log.d(TAG, "onRenderSuccess: 渲染成功");
+                Logger.i("ExpressView", "render suc:" + (System.currentTimeMillis() - startTime));
+                Logger.i(TAG, "onRenderSuccess: 渲染成功");
                 //返回view的宽高 单位 dp
                 mExpressContainer.setVisibility(View.VISIBLE);
-                if(welcomeTv != null){
+                if (welcomeTv != null) {
                     welcomeTv.setVisibility(View.GONE);
                 }
                 mExpressContainer.removeAllViews();
@@ -151,35 +151,35 @@ public class BannerAdUtils {
         ad.setDownloadListener(new TTAppDownloadListener() {
             @Override
             public void onIdle() {
-                //Log.d(TAG, "onIdle: 点击开始下载");
+                //Logger.i(TAG, "onIdle: 点击开始下载");
             }
 
             @Override
             public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
                 if (!mHasShowDownloadActive) {
                     mHasShowDownloadActive = true;
-                    Log.d(TAG, "onDownloadActive: 下载中，点击暂停");
+                    Logger.i(TAG, "onDownloadActive: 下载中，点击暂停");
                 }
             }
 
             @Override
             public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
-                Log.d(TAG, "onDownloadPaused: 下载暂停，点击继续");
+                Logger.i(TAG, "onDownloadPaused: 下载暂停，点击继续");
             }
 
             @Override
             public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
-                Log.d(TAG, "onDownloadFailed: 下载失败，点击重新下载");
+                Logger.i(TAG, "onDownloadFailed: 下载失败，点击重新下载");
             }
 
             @Override
             public void onInstalled(String fileName, String appName) {
-                Log.d(TAG, "onInstalled: 安装完成，点击图片打开");
+                Logger.i(TAG, "onInstalled: 安装完成，点击图片打开");
             }
 
             @Override
             public void onDownloadFinished(long totalBytes, String fileName, String appName) {
-                Log.d(TAG, "onDownloadFinished: 点击安装");
+                Logger.i(TAG, "onDownloadFinished: 点击安装");
             }
         });
     }
@@ -225,7 +225,7 @@ public class BannerAdUtils {
 
             @Override
             public void onCancel() {
-                Log.d(TAG, "onCancel: 点击取消");
+                Logger.i(TAG, "onCancel: 点击取消");
             }
         });
     }

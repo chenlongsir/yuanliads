@@ -2,12 +2,12 @@ package com.yuanli.ksads;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 
 import com.kwad.sdk.api.KsAdSDK;
 import com.kwad.sdk.api.KsInitCallback;
 import com.kwad.sdk.api.KsLoadManager;
 import com.kwad.sdk.api.SdkConfig;
+import com.yuanli.base.log.Logger;
 import com.yuanli.ksads.constants.KsBean;
 import com.yuanli.ksads.constants.KsConstants;
 import com.yuanli.ksads.utils.InitUtils;
@@ -70,7 +70,7 @@ public class KsManagerHolder {
                     @Override
                     public void onSuccess() {
                         // 启动成功后再获取SDK
-                        Log.d(KsConstants.TAG, "start success");
+                        Logger.i(KsConstants.TAG, "start success");
                         isFail = false;
                         sInit = true;
                         if (initListener != null){
@@ -80,7 +80,7 @@ public class KsManagerHolder {
 
                     @Override
                     public void onFail(int code, String msg) {
-                        Log.d(KsConstants.TAG, "start fail msg: " + msg);
+                        Logger.i(KsConstants.TAG, "start fail msg: " + msg);
                         isFail = true;
                         if (initListener != null) {
                             initListener.onError("SDK初始化失败");

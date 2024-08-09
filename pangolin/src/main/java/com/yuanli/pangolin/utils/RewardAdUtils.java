@@ -2,7 +2,7 @@ package com.yuanli.pangolin.utils;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+
 
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
@@ -12,6 +12,7 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot;
 import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
+import com.yuanli.base.log.Logger;
 import com.yuanli.pangolin.constants.AdConstants;
 import com.yuanli.pangolin.holder.TTAdManagerHolder;
 
@@ -67,14 +68,14 @@ public class RewardAdUtils implements Ad {
         this.mRewardVideoListener = new TTAdNative.RewardVideoAdListener() {
             @Override
             public void onError(int i, String s) {
-                Log.d(AdConstants.TAG, "reward load fail: errCode: " + i + ", errMsg: " + s);
+                Logger.i(AdConstants.TAG, "reward load fail: errCode: " + i + ", errMsg: " + s);
                 adStateListener.stopLoading();
                 adStateListener.onError("errMsg: " + s);
             }
 
             @Override
             public void onRewardVideoAdLoad(TTRewardVideoAd ttRewardVideoAd) {
-                Log.d(AdConstants.TAG, "reward load success");
+                Logger.i(AdConstants.TAG, "reward load success");
                 mTTRewardVideoAd = ttRewardVideoAd;
                 adStateListener.stopLoading();
                 adStateListener.real(RewardAdUtils.this);
@@ -82,12 +83,12 @@ public class RewardAdUtils implements Ad {
 
             @Override
             public void onRewardVideoCached() {
-                Log.d(AdConstants.TAG, "reward cached success");
+                Logger.i(AdConstants.TAG, "reward cached success");
             }
 
             @Override
             public void onRewardVideoCached(TTRewardVideoAd ttRewardVideoAd) {
-                Log.d(AdConstants.TAG, "reward cached success 2");
+                Logger.i(AdConstants.TAG, "reward cached success 2");
                 mTTRewardVideoAd = ttRewardVideoAd;
                 adStateListener.stopLoading();
                 adStateListener.real(RewardAdUtils.this);
@@ -96,17 +97,17 @@ public class RewardAdUtils implements Ad {
         this.mRewardVideoAdInteractionListener = new TTRewardVideoAd.RewardAdInteractionListener() {
             @Override
             public void onAdShow() {
-                Log.d(AdConstants.TAG, "reward show");
+                Logger.i(AdConstants.TAG, "reward show");
             }
 
             @Override
             public void onAdVideoBarClick() {
-                Log.d(AdConstants.TAG, "reward click");
+                Logger.i(AdConstants.TAG, "reward click");
             }
 
             @Override
             public void onAdClose() {
-                Log.d(AdConstants.TAG, "reward close");
+                Logger.i(AdConstants.TAG, "reward close");
                 adStateListener.onClose();
                 if (isLoadSuccess && adStateListener != null){
                     adStateListener.successClose();
@@ -115,22 +116,22 @@ public class RewardAdUtils implements Ad {
 
             @Override
             public void onVideoComplete() {
-                Log.d(AdConstants.TAG, "reward onVideoComplete");
+                Logger.i(AdConstants.TAG, "reward onVideoComplete");
             }
 
             @Override
             public void onVideoError() {
-                Log.d(AdConstants.TAG, "reward onVideoError");
+                Logger.i(AdConstants.TAG, "reward onVideoError");
             }
 
             @Override
             public void onRewardVerify(boolean b, int i, String s, int i1, String s1) {
-                Log.d(AdConstants.TAG, "reward onRewardVerify");
+                Logger.i(AdConstants.TAG, "reward onRewardVerify");
             }
 
             @Override
             public void onRewardArrived(boolean b, int i, Bundle bundle) {
-                Log.d(AdConstants.TAG, "reward onRewardArrived");
+                Logger.i(AdConstants.TAG, "reward onRewardArrived");
                 isLoadSuccess = true;
                 if (adStateListener != null){
                     adStateListener.success();
@@ -139,7 +140,7 @@ public class RewardAdUtils implements Ad {
 
             @Override
             public void onSkippedVideo() {
-                Log.d(AdConstants.TAG, "reward onSkippedVideo");
+                Logger.i(AdConstants.TAG, "reward onSkippedVideo");
             }
         };
     }
@@ -148,7 +149,7 @@ public class RewardAdUtils implements Ad {
     @Override
     public void showAd() {
         if (mTTRewardVideoAd == null) {
-            Log.d(AdConstants.TAG, "请先加载广告或等待广告加载完毕后再调用show方法");
+            Logger.i(AdConstants.TAG, "请先加载广告或等待广告加载完毕后再调用show方法");
             return;
         }
         //5、设置展示监听器，展示广告 */

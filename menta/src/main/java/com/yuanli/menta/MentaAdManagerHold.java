@@ -1,10 +1,9 @@
 package com.yuanli.menta;
 
 import android.app.Application;
-import android.util.Log;
 
+import com.yuanli.base.log.Logger;
 import com.yuanli.menta.constants.MentaBean;
-import com.yuanli.menta.constants.MentaConstants;
 import com.yuanli.menta.utils.InitUtils;
 
 import cn.vlion.ad.inland.base.util.init.VlionLocation;
@@ -13,21 +12,19 @@ import cn.vlion.ad.inland.base.util.init.VlionSdkConfig;
 import cn.vlion.ad.inland.core.init.VlionSDk;
 
 public class MentaAdManagerHold {
-    private static Application mApplication;
     private static String oaid;
 
     private static boolean isInitSuccess = false;
 
     public static void init(Application application, MentaBean mentaBean){
         OaidUtils.getOaid(application,(oaid)->{
-            Log.d("TAG", "init: oaid" + oaid);
+            Logger.i("TAG", "init: oaid" + oaid);
             InitUtils.init(mentaBean);
             initMentaAd(application,oaid);
         });
     }
     public static void initMentaAd(Application application,String oaid) {
         isInitSuccess = true;
-        mApplication = application;
         MentaAdManagerHold.oaid = oaid;
         VlionSdkConfig config = new VlionSdkConfig
                 .Builder()

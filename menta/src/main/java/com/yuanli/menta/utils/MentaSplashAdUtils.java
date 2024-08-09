@@ -1,9 +1,10 @@
 package com.yuanli.menta.utils;
 
 import android.app.Activity;
-import android.util.Log;
+
 import android.view.ViewGroup;
 
+import com.yuanli.base.log.Logger;
 import com.yuanli.menta.MentaAdBack;
 import com.yuanli.menta.MentaAdManagerHold;
 import com.yuanli.menta.constants.MentaConstants;
@@ -65,7 +66,7 @@ public class MentaSplashAdUtils {
              */
             @Override
             public void onAdLoadSuccess(double price) {
-                Log.d(MentaConstants.TAG,"onAdLoadSuccess:"+price);
+                Logger.i(MentaConstants.TAG,"onAdLoadSuccess:"+price);
                 //竞价成功调用
                 vlionSplashAd.notifyWinPrice();
             }
@@ -76,7 +77,7 @@ public class MentaSplashAdUtils {
              */
             @Override
             public void onAdLoadFailure(VlionAdError vlionAdError) {
-                Log.d(MentaConstants.TAG,"onAdLoadFailure:"+vlionAdError.code+"--msg:"+vlionAdError.getDesc());
+                Logger.i(MentaConstants.TAG,"onAdLoadFailure:"+vlionAdError.code+"--msg:"+vlionAdError.getDesc());
                 if (mMentaSplashBack != null){
                     mMentaSplashBack.onFail();
                 }
@@ -87,7 +88,7 @@ public class MentaSplashAdUtils {
              */
             @Override
             public void onAdRenderSuccess() {
-                Log.d(MentaConstants.TAG,"onAdRenderSuccess:");
+                Logger.i(MentaConstants.TAG,"onAdRenderSuccess:");
                 //广告视图渲染成功调用，添加到自己的容器中
                 mViewGroup.removeAllViews();
                 vlionSplashAd.showAd(mViewGroup);
@@ -112,7 +113,7 @@ public class MentaSplashAdUtils {
 
             @Override
             public void onAdShowFailure(VlionAdError vlionAdError) {
-                Log.d(MentaConstants.TAG,"onAdShowFailure:"+vlionAdError.code+"--msg:"+vlionAdError.getDesc());
+                Logger.i(MentaConstants.TAG,"onAdShowFailure:"+vlionAdError.code+"--msg:"+vlionAdError.getDesc());
             }
 
             /**
@@ -120,12 +121,12 @@ public class MentaSplashAdUtils {
              */
             @Override
             public void onAdClick() {
-                Log.d(MentaConstants.TAG,"onAdClick:");
+                Logger.i(MentaConstants.TAG,"onAdClick:");
             }
 
             @Override
             public void onAdSkip() {
-                Log.d(MentaConstants.TAG,"onAdSkip:");
+                Logger.i(MentaConstants.TAG,"onAdSkip:");
                 if (mMentaSplashBack != null){
                     mMentaSplashBack.onSkip();
                 }
@@ -136,7 +137,7 @@ public class MentaSplashAdUtils {
              */
             @Override
             public void onAdClose() {
-                Log.d(MentaConstants.TAG,"onAdClose:");
+                Logger.i(MentaConstants.TAG,"onAdClose:");
                 if (mMentaSplashBack != null){
                     mMentaSplashBack.onClose();
                 }

@@ -2,7 +2,7 @@ package com.yuanli.ylh.utils;
 
 
 import android.app.Activity;
-import android.util.Log;
+
 import android.widget.Toast;
 
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
@@ -10,6 +10,7 @@ import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.comm.util.AdError;
 import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
+import com.yuanli.base.log.Logger;
 import com.yuanli.ylh.YlhManagerHolder;
 import com.yuanli.ylh.constants.YlhConstants;
 
@@ -37,48 +38,43 @@ public class YlhRewardAdUtils implements Ad {
         @Override
         public void onADLoad() {
             adStateListener.stopLoading();
-            Log.d(YlhConstants.TAG, "onADLoad: ");
+            Logger.i(YlhConstants.TAG, "onADLoad: ");
             adStateListener.real(YlhRewardAdUtils.this);
         }
 
         @Override
         public void onVideoCached() {
-            Log.d(YlhConstants.TAG, "onVideoCached: ");
+            Logger.i(YlhConstants.TAG, "onVideoCached: ");
 
         }
 
         @Override
         public void onADShow() {
-            Log.d(YlhConstants.TAG, "onADShow: ");
+            Logger.i(YlhConstants.TAG, "onADShow: ");
         }
 
         @Override
         public void onADExpose() {
-            Log.d(YlhConstants.TAG, "onADExpose: ");
+            Logger.i(YlhConstants.TAG, "onADExpose: ");
 
         }
 
         @Override
         public void onReward(Map<String, Object> map) {
-            Log.d(YlhConstants.TAG, "onReward: ");
+            Logger.i(YlhConstants.TAG, "onReward: ");
 
         }
 
         @Override
         public void onADClick() {
-            Log.d(YlhConstants.TAG, "onADClick: ");
+            Logger.i(YlhConstants.TAG, "onADClick: ");
 
         }
 
         @Override
         public void onVideoComplete() {
-            Log.d(YlhConstants.TAG, "onVideoComplete: ");
+            Logger.i(YlhConstants.TAG, "onVideoComplete: ");
             isLoadSuccess = true;
-        }
-
-        @Override
-        public void onADClose() {
-            Log.d(YlhConstants.TAG, "onADClose: ");
             if (adStateListener != null){
                 adStateListener.success();
                 adStateListener.successClose();
@@ -86,9 +82,17 @@ public class YlhRewardAdUtils implements Ad {
         }
 
         @Override
+        public void onADClose() {
+            Logger.i(YlhConstants.TAG, "onADClose: ");
+            if (adStateListener != null){
+                adStateListener.onClose();
+            }
+        }
+
+        @Override
         public void onError(AdError adError) {
             adStateListener.stopLoading();
-            Log.d(YlhConstants.TAG, "onError: " + adError.getErrorMsg());
+            Logger.i(YlhConstants.TAG, "onError: " + adError.getErrorMsg());
             adStateListener.onError("onError: " + adError.getErrorMsg());
         }
     };

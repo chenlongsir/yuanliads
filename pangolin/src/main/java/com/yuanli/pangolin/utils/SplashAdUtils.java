@@ -2,13 +2,14 @@ package com.yuanli.pangolin.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.util.Log;
+
 import android.view.View;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.CSJAdError;
 import com.bytedance.sdk.openadsdk.CSJSplashAd;
 import com.bytedance.sdk.openadsdk.TTAdNative;
+import com.yuanli.base.log.Logger;
 import com.yuanli.pangolin.holder.TTAdManagerHolder;
 
 public class SplashAdUtils {
@@ -57,20 +58,20 @@ public class SplashAdUtils {
 
                     @Override
                     public void onSplashLoadFail(CSJAdError csjAdError) {
-                        Log.d(TAG, "开屏广告下载失败" + csjAdError.getMsg());
+                        Logger.i(TAG, "开屏广告下载失败" + csjAdError.getMsg());
                         closeAd();
                     }
 
                     @Override
                     public void onSplashRenderSuccess(CSJSplashAd csjSplashAd) {
-                        Log.d(TAG, "开屏广告请求成功");
-                        /** 渲染成功后，展示广告 */
+                        Logger.i(TAG, "开屏广告请求成功");
+                        //渲染成功后，展示广告 */
                         showSplashAd(csjSplashAd,adStateListener);
                     }
 
                     @Override
                     public void onSplashRenderFail(CSJSplashAd csjSplashAd, CSJAdError 			                                        csjAdError) {
-                        Log.d(TAG, "开屏广告加载超时");
+                        Logger.i(TAG, "开屏广告加载超时");
                         closeAd();
                     }
                 }, AD_TIME_OUT);

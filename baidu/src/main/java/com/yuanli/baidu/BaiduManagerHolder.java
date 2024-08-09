@@ -2,13 +2,14 @@ package com.yuanli.baidu;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
+
 
 import com.baidu.mobads.sdk.api.BDAdConfig;
 import com.baidu.mobads.sdk.api.BDDialogParams;
 import com.yuanli.baidu.constants.BaiduBean;
 import com.yuanli.baidu.constants.BaiduConstants;
 import com.yuanli.baidu.utils.InitUtils;
+import com.yuanli.base.log.Logger;
 
 public class BaiduManagerHolder {
     private static boolean sInit;
@@ -69,7 +70,7 @@ public class BaiduManagerHolder {
                 .setBDAdInitListener(new BDAdConfig.BDAdInitListener() {
                     @Override
                     public void success() {
-                        Log.d(BaiduConstants.TAG,"SDK初始化成功");
+                        Logger.i(BaiduConstants.TAG,"SDK初始化成功");
                         isFail = false;
                         sInit = true;
                         if (initListener != null){
@@ -79,7 +80,7 @@ public class BaiduManagerHolder {
 
                     @Override
                     public void fail() {
-                        Log.d(BaiduConstants.TAG,"SDK初始化失败");
+                        Logger.i(BaiduConstants.TAG,"SDK初始化失败");
                         isFail = true;
                         if (initListener != null){
                             initListener.onError("SDK初始化失败");

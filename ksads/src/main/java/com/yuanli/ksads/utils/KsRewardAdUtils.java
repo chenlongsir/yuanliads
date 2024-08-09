@@ -2,7 +2,6 @@ package com.yuanli.ksads.utils;
 
 
 import android.app.Activity;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -11,6 +10,7 @@ import com.kwad.sdk.api.KsRewardVideoAd;
 import com.kwad.sdk.api.KsScene;
 import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
+import com.yuanli.base.log.Logger;
 import com.yuanli.ksads.KsManagerHolder;
 import com.yuanli.ksads.constants.KsConstants;
 
@@ -36,19 +36,19 @@ public class KsRewardAdUtils implements Ad {
                 KsManagerHolder.get().loadRewardVideoAd(scene, new KsLoadManager.RewardVideoAdListener() {
                     @Override
                     public void onError(int code, String msg) {
-                        Log.d(KsConstants.TAG, "onError: " + msg);
+                        Logger.i(KsConstants.TAG, "onError: " + msg);
                         adStateListener.onError("onError: " + msg);
                         adStateListener.stopLoading();
                     }
 
                     @Override
                     public void onRewardVideoResult(@Nullable List<KsRewardVideoAd> adList) {
-                        Log.d(KsConstants.TAG, "onRewardVideoResult: ");
+                        Logger.i(KsConstants.TAG, "onRewardVideoResult: ");
                     }
 
                     @Override
                     public void onRewardVideoAdLoad(@Nullable List<KsRewardVideoAd> adList) {
-                        Log.d(KsConstants.TAG, "onRewardVideoAdLoad: ");
+                        Logger.i(KsConstants.TAG, "onRewardVideoAdLoad: ");
                         if (adList != null && adList.size() > 0) {
                             mRewardVideoAd = adList.get(0);
                             adStateListener.stopLoading();
@@ -70,12 +70,12 @@ public class KsRewardAdUtils implements Ad {
     private final KsRewardVideoAd.RewardAdInteractionListener rewardAdInteractionListener = new KsRewardVideoAd.RewardAdInteractionListener() {
         @Override
         public void onAdClicked() {
-            Log.d(KsConstants.TAG, "onAdClicked: ");
+            Logger.i(KsConstants.TAG, "onAdClicked: ");
         }
 
         @Override
         public void onPageDismiss() {
-            Log.d(KsConstants.TAG, "onPageDismiss: ");
+            Logger.i(KsConstants.TAG, "onPageDismiss: ");
             if (isLoadSuccess && adStateListener != null) {
                 adStateListener.successClose();
             }
@@ -83,29 +83,29 @@ public class KsRewardAdUtils implements Ad {
 
         @Override
         public void onVideoPlayError(int code, int extra) {
-            Log.d(KsConstants.TAG, "onVideoPlayError: ");
+            Logger.i(KsConstants.TAG, "onVideoPlayError: ");
             adStateListener.stopLoading();
             adStateListener.onError("onVideoPlayError" + "广告播放错误");
         }
 
         @Override
         public void onVideoPlayEnd() {
-            Log.d(KsConstants.TAG, "onVideoPlayEnd: ");
+            Logger.i(KsConstants.TAG, "onVideoPlayEnd: ");
         }
 
         @Override
         public void onVideoSkipToEnd(long l) {
-            Log.d(KsConstants.TAG, "onVideoSkipToEnd: ");
+            Logger.i(KsConstants.TAG, "onVideoSkipToEnd: ");
         }
 
         @Override
         public void onVideoPlayStart() {
-            Log.d(KsConstants.TAG, "onVideoPlayStart: ");
+            Logger.i(KsConstants.TAG, "onVideoPlayStart: ");
         }
 
         @Override
         public void onRewardVerify() {
-            Log.d(KsConstants.TAG, "onRewardVerify: ");
+            Logger.i(KsConstants.TAG, "onRewardVerify: ");
             isLoadSuccess = true;
             if (adStateListener != null) {
                 adStateListener.success();
@@ -114,12 +114,12 @@ public class KsRewardAdUtils implements Ad {
 
         @Override
         public void onRewardStepVerify(int taskType, int currentTaskStatus) {
-            Log.d(KsConstants.TAG, "onRewardVerify: ");
+            Logger.i(KsConstants.TAG, "onRewardVerify: ");
         }
 
         @Override
         public void onExtraRewardVerify(int i) {
-            Log.d(KsConstants.TAG, "onExtraRewardVerify: ");
+            Logger.i(KsConstants.TAG, "onExtraRewardVerify: ");
 
         }
     };
@@ -132,7 +132,7 @@ public class KsRewardAdUtils implements Ad {
             mRewardVideoAd.setRewardAdInteractionListener(rewardAdInteractionListener);
             mRewardVideoAd.showRewardVideoAd(activity, null);
         } else {
-            Log.d("TAG", "showAd: " + "暂无可用激励视频广告，请等待缓存加载或者重新刷新");
+            Logger.i("TAG", "showAd: " + "暂无可用激励视频广告，请等待缓存加载或者重新刷新");
             adStateListener.stopLoading();
             adStateListener.onError("showAd: " + "暂无可用激励视频广告，请等待缓存加载或者重新刷新");
         }

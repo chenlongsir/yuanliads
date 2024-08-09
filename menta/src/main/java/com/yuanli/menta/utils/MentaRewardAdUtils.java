@@ -1,10 +1,11 @@
 package com.yuanli.menta.utils;
 
 import android.app.Activity;
-import android.util.Log;
+
 
 import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
+import com.yuanli.base.log.Logger;
 import com.yuanli.menta.MentaAdManagerHold;
 
 import cn.vlion.ad.inland.base.util.config.VlionScaleType;
@@ -41,7 +42,7 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdLoadSuccess(double price) {
-                Log.d(TAG, "onAdLoadSuccess: ");
+                Logger.i(TAG, "onAdLoadSuccess: ");
                 vlionRewardedVideoAd.notifyWinPrice();
             }
             /**
@@ -51,8 +52,8 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdLoadFailure(VlionAdError vlionAdError) {
-                Log.d(TAG, "onAdLoadFailure: " + vlionAdError.toString());
-                Log.d(TAG, "onAdLoadFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
+                Logger.i(TAG, "onAdLoadFailure: " + vlionAdError.toString());
+                Logger.i(TAG, "onAdLoadFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
                 adStateListener.stopLoading();
                 adStateListener.onError("onAdLoadFailure:" + "激励视频加载失败");
             }
@@ -62,7 +63,7 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdRenderSuccess() {
-                Log.d(TAG, "onAdRenderSuccess: ");
+                Logger.i(TAG, "onAdRenderSuccess: ");
                 adStateListener.stopLoading();
                 adStateListener.real(MentaRewardAdUtils.this);
             }
@@ -74,8 +75,8 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdRenderFailure(VlionAdError vlionAdError) {
-                Log.d(TAG, "onAdRenderFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
-                Log.d(TAG, "onAdRenderFailure: ");
+                Logger.i(TAG, "onAdRenderFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
+                Logger.i(TAG, "onAdRenderFailure: ");
                 adStateListener.stopLoading();
                 adStateListener.onError("onAdRenderFailure" + "激励视频视图渲染失败");
             }
@@ -85,7 +86,7 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onVideoStart() {
-                Log.d(TAG, "onVideoStart: ");
+                Logger.i(TAG, "onVideoStart: ");
             }
             /**
              *  激励视频播放失败
@@ -94,7 +95,7 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdPlayFailure(VlionAdError vlionAdError) {
-                Log.d(TAG, "onAdPlayFailure: ");
+                Logger.i(TAG, "onAdPlayFailure: ");
                 adStateListener.stopLoading();
                 adStateListener.onError("onAdPlayFailure" + "激励视频播放失败");
             }
@@ -103,13 +104,13 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdExposure() {
-                Log.d(TAG, "onAdExposure: ");
+                Logger.i(TAG, "onAdExposure: ");
             }
 
             @Override
             public void onAdShowFailure(VlionAdError vlionAdError) {
-                Log.d(TAG, "onAdShowFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
-                Log.d(TAG, "onAdShowFailure: ");
+                Logger.i(TAG, "onAdShowFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
+                Logger.i(TAG, "onAdShowFailure: ");
                 adStateListener.stopLoading();
                 adStateListener.onError("onAdShowFailure" + "激励视频播放失败");
             }
@@ -119,14 +120,14 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onVideoCompleted() {
-                Log.d(TAG, "onVideoCompleted: ");
+                Logger.i(TAG, "onVideoCompleted: ");
             }
             /**
              * 激励视频奖励发放
              */
             @Override
             public void onAdReward() {
-                Log.d(TAG, "onAdReward: ");
+                Logger.i(TAG, "onAdReward: ");
                 isLoadSuccess = true;
                 adStateListener.success();
             }
@@ -135,7 +136,7 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdVideoSkip() {
-                Log.d(TAG, "onAdVideoSkip: ");
+                Logger.i(TAG, "onAdVideoSkip: ");
 
             }
             /**
@@ -143,14 +144,14 @@ public class MentaRewardAdUtils implements Ad {
              */
             @Override
             public void onAdClick() {
-                Log.d(TAG, "onAdClick: ");
+                Logger.i(TAG, "onAdClick: ");
             }
             /**
              * 激励视频关闭
              */
             @Override
             public void onAdClose() {
-                Log.d(TAG, "onAdClose: ");
+                Logger.i(TAG, "onAdClose: ");
                 adStateListener.onClose();
                 if (isLoadSuccess){
                     adStateListener.successClose();

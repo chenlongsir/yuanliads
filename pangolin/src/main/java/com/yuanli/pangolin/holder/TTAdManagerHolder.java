@@ -5,12 +5,13 @@ import static com.yuanli.pangolin.constants.AdConstants.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
+
 
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
+import com.yuanli.base.log.Logger;
 import com.yuanli.pangolin.constants.AdConstants;
 import com.yuanli.pangolin.constants.PangolinAdBean;
 import com.yuanli.pangolin.utils.InitUtils;
@@ -62,7 +63,7 @@ public class TTAdManagerHolder {
             TTAdSdk.start(new TTAdSdk.Callback() {
                 @Override
                 public void success() {
-                    Log.d(TAG, "success: " + TTAdSdk.isInitSuccess());
+                    Logger.i(TAG, "success: " + TTAdSdk.isInitSuccess());
                     isFail = false;
                     sInit = true;
                     if (initListener != null){
@@ -72,7 +73,7 @@ public class TTAdManagerHolder {
 
                 @Override
                 public void fail(int code, String msg) {
-                    Log.d(TAG, "fail:  code = " + code + " msg = " + msg);
+                    Logger.i(TAG, "fail:  code = " + code + " msg = " + msg);
                     isFail = true;
                     if (initListener != null){
                         initListener.onError(msg);

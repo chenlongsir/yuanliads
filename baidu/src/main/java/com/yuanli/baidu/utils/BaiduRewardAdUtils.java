@@ -3,12 +3,13 @@ package com.yuanli.baidu.utils;
 import static com.yuanli.baidu.constants.BaiduConstants.TAG;
 
 import android.app.Activity;
-import android.util.Log;
+
 
 import com.baidu.mobads.sdk.api.RewardVideoAd;
 import com.yuanli.baidu.BaiduManagerHolder;
 import com.yuanli.base.Ad;
 import com.yuanli.base.AdStateListener;
+import com.yuanli.base.log.Logger;
 
 public class BaiduRewardAdUtils implements Ad {
     private Activity activity;
@@ -45,18 +46,18 @@ public class BaiduRewardAdUtils implements Ad {
     private final RewardVideoAd.RewardVideoAdListener rewardListener = new RewardVideoAd.RewardVideoAdListener() {
         @Override
         public void onAdShow() {
-            Log.d(TAG, "onAdShow: ");
+            Logger.i(TAG, "onAdShow: ");
             adStateListener.stopLoading();
         }
 
         @Override
         public void onAdClick() {
-            Log.d(TAG, "onAdClick: ");
+            Logger.i(TAG, "onAdClick: ");
         }
 
         @Override
         public void onAdClose(float v) {
-            Log.d(TAG, "onAdClose: ");
+            Logger.i(TAG, "onAdClose: ");
             if (isLoadSuccess && adStateListener != null){
                 adStateListener.successClose();
             }
@@ -64,14 +65,14 @@ public class BaiduRewardAdUtils implements Ad {
 
         @Override
         public void onAdFailed(String s) {
-            Log.d(TAG, "onAdFailed: " + s);
+            Logger.i(TAG, "onAdFailed: " + s);
             adStateListener.stopLoading();
             adStateListener.onError("onAdFailed" + s);
         }
 
         @Override
         public void onVideoDownloadSuccess() {
-            Log.d(TAG, "onVideoDownloadSuccess: ");
+            Logger.i(TAG, "onVideoDownloadSuccess: ");
             adStateListener.real(BaiduRewardAdUtils.this);
         }
 
@@ -79,31 +80,31 @@ public class BaiduRewardAdUtils implements Ad {
         public void onVideoDownloadFailed() {
             adStateListener.stopLoading();
             adStateListener.onError("onVideoDownloadFailed" + "广告下载失败");
-            Log.d(TAG, "onVideoDownloadFailed: ");
+            Logger.i(TAG, "onVideoDownloadFailed: ");
 
         }
 
         @Override
         public void playCompletion() {
-            Log.d(TAG, "playCompletion: ");
+            Logger.i(TAG, "playCompletion: ");
 
         }
 
         @Override
         public void onAdLoaded() {
-            Log.d(TAG, "onAdLoaded: ");
+            Logger.i(TAG, "onAdLoaded: ");
 
         }
 
         @Override
         public void onAdSkip(float v) {
-            Log.d(TAG, "onAdSkip: ");
+            Logger.i(TAG, "onAdSkip: ");
 
         }
 
         @Override
         public void onRewardVerify(boolean b) {
-            Log.d(TAG, "onRewardVerify: ");
+            Logger.i(TAG, "onRewardVerify: ");
             isLoadSuccess = b;
             if (adStateListener != null){
                 adStateListener.success();
