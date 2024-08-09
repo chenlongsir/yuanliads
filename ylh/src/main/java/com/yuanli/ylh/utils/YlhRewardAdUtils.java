@@ -79,15 +79,17 @@ public class YlhRewardAdUtils implements Ad {
         @Override
         public void onADClose() {
             Log.d(YlhConstants.TAG, "onADClose: ");
-            adStateListener.success();
-            adStateListener.successClose();
+            if (adStateListener != null){
+                adStateListener.success();
+                adStateListener.successClose();
+            }
         }
 
         @Override
         public void onError(AdError adError) {
             adStateListener.stopLoading();
             Log.d(YlhConstants.TAG, "onError: " + adError.getErrorMsg());
-            adStateListener.onError();
+            adStateListener.onError("onError: " + adError.getErrorMsg());
         }
     };
 

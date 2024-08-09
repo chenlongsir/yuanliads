@@ -53,7 +53,7 @@ public class InsertAdUtils implements Ad {
 
             @Override
             public void onError(String msg) {
-                stateListener.onError();
+                stateListener.onError(msg);
                 stateListener.toast(msg);
             }
         });
@@ -75,7 +75,7 @@ public class InsertAdUtils implements Ad {
             public void onError(int code, String message) {
                 Log.d(AdConstants.TAG, "InterstitialFull onError code = " + code + " msg = " + message);
                 stateListener.stopLoading();
-                stateListener.onError();
+                stateListener.onError(message);
             }
 
             public void onFullScreenVideoAdLoad(TTFullScreenVideoAd ad) {

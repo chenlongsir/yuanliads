@@ -54,7 +54,7 @@ public class MentaRewardAdUtils implements Ad {
                 Log.d(TAG, "onAdLoadFailure: " + vlionAdError.toString());
                 Log.d(TAG, "onAdLoadFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdLoadFailure:" + "激励视频加载失败");
             }
             /**
              *  激励视频视图渲染成功
@@ -77,7 +77,7 @@ public class MentaRewardAdUtils implements Ad {
                 Log.d(TAG, "onAdRenderFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
                 Log.d(TAG, "onAdRenderFailure: ");
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdRenderFailure" + "激励视频视图渲染失败");
             }
             /**
              *  激励视频开始播放
@@ -96,7 +96,7 @@ public class MentaRewardAdUtils implements Ad {
             public void onAdPlayFailure(VlionAdError vlionAdError) {
                 Log.d(TAG, "onAdPlayFailure: ");
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdPlayFailure" + "激励视频播放失败");
             }
             /**
              * 激励视频曝光
@@ -111,7 +111,7 @@ public class MentaRewardAdUtils implements Ad {
                 Log.d(TAG, "onAdShowFailure: " + vlionAdError.getCode() + vlionAdError.getPlatformMSG());
                 Log.d(TAG, "onAdShowFailure: ");
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdShowFailure" + "激励视频播放失败");
             }
 
             /**
@@ -164,7 +164,7 @@ public class MentaRewardAdUtils implements Ad {
     @Override
     public void loadAd(AdStateListener adStateListener) {
         if (!MentaAdManagerHold.isIsInitSuccess()){
-            adStateListener.onError();
+            adStateListener.onError("初始化失败");
             return;
         }
         this.adStateListener = adStateListener;

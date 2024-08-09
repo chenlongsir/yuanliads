@@ -56,7 +56,7 @@ public class RewardAdUtils implements Ad {
             @Override
             public void onError(String msg) {
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError(msg);
                 adStateListener.toast(msg);
             }
         });
@@ -69,7 +69,7 @@ public class RewardAdUtils implements Ad {
             public void onError(int i, String s) {
                 Log.d(AdConstants.TAG, "reward load fail: errCode: " + i + ", errMsg: " + s);
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("errMsg: " + s);
             }
 
             @Override
@@ -108,7 +108,7 @@ public class RewardAdUtils implements Ad {
             public void onAdClose() {
                 Log.d(AdConstants.TAG, "reward close");
                 adStateListener.onClose();
-                if (isLoadSuccess){
+                if (isLoadSuccess && adStateListener != null){
                     adStateListener.successClose();
                 }
             }
@@ -131,8 +131,10 @@ public class RewardAdUtils implements Ad {
             @Override
             public void onRewardArrived(boolean b, int i, Bundle bundle) {
                 Log.d(AdConstants.TAG, "reward onRewardArrived");
-                adStateListener.success();
                 isLoadSuccess = true;
+                if (adStateListener != null){
+                    adStateListener.success();
+                }
             }
 
             @Override
@@ -149,7 +151,7 @@ public class RewardAdUtils implements Ad {
             Log.d(AdConstants.TAG, "请先加载广告或等待广告加载完毕后再调用show方法");
             return;
         }
-        /** 5、设置展示监听器，展示广告 */
+        //5、设置展示监听器，展示广告 */
         mTTRewardVideoAd.setRewardAdInteractionListener(mRewardVideoAdInteractionListener);
         mTTRewardVideoAd.showRewardVideoAd(activity);
     }

@@ -44,7 +44,7 @@ public class MentaInsertAdUtils implements Ad {
             @Override
             public void onAdLoadFailure(VlionAdError vlionAdError) {
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdLoadFailure:" + "广告数据加载失败");
             }
 
             /**
@@ -65,7 +65,7 @@ public class MentaInsertAdUtils implements Ad {
             @Override
             public void onAdRenderFailure(VlionAdError vlionAdError) {
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdRenderFailure" + "广告视图渲染失败");
             }
 
             /**
@@ -79,7 +79,7 @@ public class MentaInsertAdUtils implements Ad {
             @Override
             public void onAdShowFailure(VlionAdError vlionAdError) {
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onAdShowFailure" + "广告视图渲染失败");
             }
 
             /**
@@ -107,7 +107,7 @@ public class MentaInsertAdUtils implements Ad {
     @Override
     public void loadAd(AdStateListener adStateListener) {
         if(MentaAdManagerHold.isIsInitSuccess()){
-            adStateListener.onError();
+            adStateListener.onError("初始化失败");
             return;
         }
         this.adStateListener = adStateListener;

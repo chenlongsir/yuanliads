@@ -35,7 +35,7 @@ public class BaiduRewardAdUtils implements Ad {
             @Override
             public void onError(String msg) {
                 adStateListener.stopLoading();
-                adStateListener.onError();
+                adStateListener.onError("onError: "+msg);
                 adStateListener.toast(msg);
             }
         });
@@ -57,7 +57,7 @@ public class BaiduRewardAdUtils implements Ad {
         @Override
         public void onAdClose(float v) {
             Log.d(TAG, "onAdClose: ");
-            if (isLoadSuccess){
+            if (isLoadSuccess && adStateListener != null){
                 adStateListener.successClose();
             }
         }
@@ -65,7 +65,8 @@ public class BaiduRewardAdUtils implements Ad {
         @Override
         public void onAdFailed(String s) {
             Log.d(TAG, "onAdFailed: " + s);
-            adStateListener.onError();
+            adStateListener.stopLoading();
+            adStateListener.onError("onAdFailed" + s);
         }
 
         @Override
@@ -76,7 +77,8 @@ public class BaiduRewardAdUtils implements Ad {
 
         @Override
         public void onVideoDownloadFailed() {
-            adStateListener.onError();
+            adStateListener.stopLoading();
+            adStateListener.onError("onVideoDownloadFailed" + "广告下载失败");
             Log.d(TAG, "onVideoDownloadFailed: ");
 
         }
@@ -103,7 +105,7 @@ public class BaiduRewardAdUtils implements Ad {
         public void onRewardVerify(boolean b) {
             Log.d(TAG, "onRewardVerify: ");
             isLoadSuccess = b;
-            if (b){
+            if (adStateListener != null){
                 adStateListener.success();
             }
         }
